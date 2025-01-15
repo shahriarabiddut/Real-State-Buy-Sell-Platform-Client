@@ -12,7 +12,7 @@ export default {
         "neue": ["Bebas Neue", "serif"],
       },
       colors: {
-        'firstBg': '#4a86e8', 
+        'firstBg': '#24a148', 
       },
     },
   },

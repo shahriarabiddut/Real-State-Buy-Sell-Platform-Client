@@ -57,6 +57,6 @@ By combining intuitive features with robust management tools, the platform ensur
 -   Admin password: admin@gmail.comA1
 -   Agent email: agent@gmail.com
 -   Agent password: agent@gmail.comA1
--   Front-end Live Site Link: phrealstate.web.app
+-   Front-end Live Site Link: https://phrealstate.web.app
 -   Client Side Github Repository Link: https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-shahriarabiddut
 -   Server Side Github Repository Link: https://github.com/Programming-Hero-Web-Course4/b10a12-server-side-shahriarabiddut
