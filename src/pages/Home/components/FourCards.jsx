@@ -6,8 +6,8 @@ import { MdRealEstateAgent } from "react-icons/md";
 
 const FourCards = () => {
   return (
-    <section className="bg-green-500 py-8 lg:pt-36 lg:-top-40 lg:relative">
-      <div className="container mx-auto">
+    <section className="bg-green-500 py-8 lg:pt-36 lg:-top-40 lg:relative ">
+      <div className="container mx-auto w-11/12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:gap-1">
           <div className="bg-green-500 text-white hover:bg-green-800 text-center p-6 flex flex-col justify-between h-full rounded-lg shadow-lg">
             <div className="mb-4">
