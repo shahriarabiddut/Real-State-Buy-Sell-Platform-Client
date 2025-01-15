@@ -1,7 +1,12 @@
 import React from "react";
+import BreadcumbBanner from "../components/BreadcumbBanner";
 
 const Agents = () => {
-  return <div>Agents</div>;
+  return (
+    <>
+      <BreadcumbBanner title={"Agents"} />
+    </>
+  );
 };
 
 export default Agents;

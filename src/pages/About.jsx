@@ -1,10 +1,10 @@
 import React from "react";
-import Banner from "../components/Banner";
+import BreadcumbBanner from "../components/BreadcumbBanner";
 
 const About = () => {
   return (
     <div>
-      <Banner />
+      <BreadcumbBanner title={"About Us"} />
     </div>
   );
 };

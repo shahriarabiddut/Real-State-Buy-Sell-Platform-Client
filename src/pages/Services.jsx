@@ -1,7 +1,12 @@
 import React from "react";
+import BreadcumbBanner from "../components/BreadcumbBanner";
 
 const Services = () => {
-  return <div>Services</div>;
+  return (
+    <>
+      <BreadcumbBanner title={"Services"} />
+    </>
+  );
 };
 
 export default Services;
