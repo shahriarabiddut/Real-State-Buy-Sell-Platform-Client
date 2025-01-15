@@ -7,6 +7,7 @@ import MostPropertyBasedOnCity from "./components/MostPropertyBasedOnCity";
 import WorkFlow from "./components/WorkFlow";
 import About from "./components/About";
 import UserReviews from "./components/UserReviews";
+import Agents from "./components/Agents";
 
 const Home = () => {
   return (
@@ -19,6 +20,7 @@ const Home = () => {
       <WorkFlow />
       <About />
       <UserReviews />
+      <Agents />
     </>
   );
 };

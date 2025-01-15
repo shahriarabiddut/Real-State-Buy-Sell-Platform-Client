@@ -4,8 +4,8 @@ import blob from "../../../assets/blob.png";
 
 const WorkFlow = () => {
   return (
-    <section className="bg-slate-800 py-24">
-      <div className="container mx-auto">
+    <section className="bg-slate-800 ">
+      <div className="container mx-auto w-11/12 py-24">
         <SectionTitle
           title={"How it works"}
           subTitle={"Work flow"}

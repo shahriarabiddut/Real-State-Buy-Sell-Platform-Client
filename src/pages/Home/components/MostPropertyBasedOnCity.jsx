@@ -34,6 +34,7 @@ const MostPropertyBasedOnCity = () => {
         <SectionTitle
           title={"Most Properties Listed Cities"}
           subTitle={"Properties"}
+          color={"black"}
         />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {cities.map((city, index) => (

@@ -53,8 +53,8 @@ const reviews = [
 ];
 const UserReviews = () => {
   return (
-    <section className="bg-gray-200 py-20">
-      <div className="container mx-auto text-center">
+    <section className="bg-gray-200 ">
+      <div className="container mx-auto text-center py-20 w-11/12">
         <SectionTitle
           title={"Happy Clients"}
           subTitle={"User Reviews"}
