@@ -54,6 +54,21 @@ const FeaturedProperties = () => {
       agentName: "John Dorf",
       timeAgo: "2 weeks ago",
     },
+    {
+      image: fp1,
+      status: "Sale",
+      price: "300,000",
+      details: {
+        beds: 3,
+        baths: 2,
+        area: "1,878 sqft",
+      },
+      title: "The Blue Sky Home",
+      location: "Oakland",
+      agentImage: "images/person_1.jpg",
+      agentName: "John Dorf",
+      timeAgo: "2 weeks ago",
+    },
   ];
   const handleImageError = (e, imageError) => {
     e.target.src = imageError;
@@ -61,12 +76,13 @@ const FeaturedProperties = () => {
 
   return (
     <>
-      <div className="container mx-auto w-11/12 py-10 lg:-mt-2 lg:py-0 lg:pb-8">
+      <div className="container mx-auto w-11/12 py-20 lg:-mt-24 lg:py-10 lg:mb-14 ">
         <SectionTitle
           title={"Featured Properties"}
           subTitle={"What we offer"}
+          color="black"
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {properties.map((property, index) => (
             <div
               key={index}

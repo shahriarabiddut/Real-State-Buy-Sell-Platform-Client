@@ -4,6 +4,7 @@ import place1 from "../../../assets/place-1.jpg";
 import place2 from "../../../assets/place-2.jpg";
 import place3 from "../../../assets/place-3.jpg";
 import { Link } from "react-router-dom";
+import placeError from "../../../assets/placeError.jpg";
 
 const MostPropertyBasedOnCity = () => {
   const cities = [
@@ -23,10 +24,13 @@ const MostPropertyBasedOnCity = () => {
       image: place3,
     },
   ];
+  const handleImageError = (e) => {
+    e.target.src = placeError;
+  };
 
   return (
-    <>
-      <div className="container mx-auto w-11/12 py-10 ">
+    <section className="bg-gray-100">
+      <div className="container mx-auto w-11/12 py-20  ">
         <SectionTitle
           title={"Most Properties Listed Cities"}
           subTitle={"Properties"}
@@ -51,7 +55,7 @@ const MostPropertyBasedOnCity = () => {
           ))}
         </div>
       </div>
-    </>
+    </section>
   );
 };
 

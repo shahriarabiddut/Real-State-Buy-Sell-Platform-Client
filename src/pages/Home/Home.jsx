@@ -4,6 +4,9 @@ import SearchBar from "../../components/SearchBar";
 import FourCards from "./components/FourCards";
 import FeaturedProperties from "./components/FeaturedProperties";
 import MostPropertyBasedOnCity from "./components/MostPropertyBasedOnCity";
+import WorkFlow from "./components/WorkFlow";
+import About from "./components/About";
+import UserReviews from "./components/UserReviews";
 
 const Home = () => {
   return (
@@ -13,6 +16,9 @@ const Home = () => {
       <FourCards />
       <FeaturedProperties />
       <MostPropertyBasedOnCity />
+      <WorkFlow />
+      <About />
+      <UserReviews />
     </>
   );
 };
