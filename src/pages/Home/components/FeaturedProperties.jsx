@@ -5,6 +5,7 @@ import fp3 from "../../../assets/fp3.jpg";
 import errorProperty from "../../../assets/errorProperty.jpg";
 import profileError from "../../../assets/profileError.png";
 import SectionTitle from "../../../components/SectionTitle";
+import { Link } from "react-router-dom";
 
 const FeaturedProperties = () => {
   const properties = [
@@ -60,7 +61,7 @@ const FeaturedProperties = () => {
 
   return (
     <>
-      <div className="container mx-auto w-11/12 py-10 lg:-mt-2 lg:py-0">
+      <div className="container mx-auto w-11/12 py-10 lg:-mt-2 lg:py-0 lg:pb-8">
         <SectionTitle
           title={"Featured Properties"}
           subTitle={"What we offer"}
@@ -92,7 +93,11 @@ const FeaturedProperties = () => {
                   <li>{property.details.baths} Baths</li>
                   <li>{property.details.area}</li>
                 </ul>
-                <h3 className="font-bold text-lg mb-1">{property.title}</h3>
+                <Link to={`#`}>
+                  <h3 className="font-bold text-lg mb-1 hover:text-blue-500">
+                    {property.title}
+                  </h3>
+                </Link>
                 <p className="text-gray-500 text-sm">{property.location}</p>
                 <div className="mt-4 flex justify-between items-center">
                   <div className="flex items-center">
@@ -114,6 +119,7 @@ const FeaturedProperties = () => {
             </div>
           ))}
         </div>
+        {/* TODO: Using Swiper JS Slide 12 properties */}
       </div>
     </>
   );
