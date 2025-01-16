@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { FaBars } from "react-icons/fa";
-import { NavLink, useLocation } from "react-router-dom";
+import { FaBars, FaDoorClosed, FaUser } from "react-icons/fa";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import profileError from "../assets/profileError.png";
+import { MdDashboard } from "react-icons/md";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -9,6 +12,18 @@ const Navbar = () => {
   const authPath = location.pathname.includes("/auth");
   const cssClass =
     "cursor-pointer rounded-xl hover:border-b-2 hover:border-white p-2";
+  const { user, logOut, showToast } = useAuth();
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const toggleProfile = () => setIsProfileOpen(!isProfileOpen);
+  const handleLogout = () => {
+    logOut()
+      .then(() => showToast("Logged Out Successfully!", "info"))
+      .catch((error) => console.log(error));
+  };
+  const handleImageError = (e, imageError) => {
+    e.target.src = imageError;
+  };
+  const cssUser = `inline-flex gap-3 items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-800 hover:text-white`;
   const links = (
     <>
       <li>
@@ -62,18 +77,60 @@ const Navbar = () => {
           Contact
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to={"/auth/login"}
-          className={cssClass}
-          onClick={() => setIsOpen(false)}
-        >
-          Login
-        </NavLink>
-      </li>
+      {user ? (
+        <>
+          <li className="relative">
+            <button
+              className="align-middle rounded-full focus:shadow-outline-purple focus:outline-none inline-flex items-center gap-2 border-2 -mt-[6px] p-1"
+              onClick={toggleProfile}
+            >
+              <img
+                className="object-cover w-8 h-8 rounded-full"
+                src={user?.photoURL}
+                alt={user?.displayName}
+                onError={(e) => handleImageError(e, profileError)}
+                aria-hidden="true"
+              />
+              <span className="truncate w-32 block">
+                {user?.displayName?.length > 12
+                  ? `${user.displayName.slice(0, 12)}...`
+                  : user?.displayName}{" "}
+              </span>
+            </button>
+            <div>
+              {isProfileOpen && (
+                <ul
+                  className={`absolute right-0 w-36 md:w-44 p-2 mt-5 space-y-2 border rounded-md shadow-md transition-all duration-300 ease-in-out transform  text-gray-600 bg-white border-gray-100`}
+                  aria-label="submenu"
+                >
+                  <li className="flex">
+                    <Link className={cssUser} to={`/dashboard`}>
+                      <MdDashboard />
+                      <span>Dashboard</span>
+                    </Link>
+                  </li>
+                  <li className="flex">
+                    <button className={cssUser} onClick={handleLogout}>
+                      <FaDoorClosed />
+                      <span>Log out</span>
+                    </button>
+                  </li>
+                </ul>
+              )}
+            </div>
+          </li>
+        </>
+      ) : (
+        <>
+          <li>
+            <NavLink className={cssClass} to={"/auth/login"}>
+              Login
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
-
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 20) {
@@ -90,11 +147,11 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 w-full z-20 transition-all duration-300 ${
+        className={`fixed top-0 left-0 w-full z-30 transition-all duration-300 ${
           authPath
-            ? "bg-firstBg shadow-md py-1 bg-opacity-95"
+            ? "bg-firstBg shadow-md py-2"
             : isScrolled
-            ? "bg-firstBg shadow-md py-1 bg-opacity-95"
+            ? "bg-firstBg shadow-md py-2"
             : "bg-transparent py-6"
         }`}
       >
@@ -122,7 +179,7 @@ const Navbar = () => {
           <div
             className={`${
               isOpen ? "flex justify-center" : "hidden"
-            } font-paaji bg-blue-200 mt-3 absolute top-16 right-0 mx-3 my-2 z-10 rounded-xl w-1/3 p-3`}
+            } font-poppins bg-blue-200 mt-4 absolute top-16 right-0 mx-3 my-2 z-10 rounded-xl w-1/3 p-3`}
           >
             <ul className="list-none flex flex-col justify-center items-center gap-3 ">
               {links}

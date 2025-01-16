@@ -11,8 +11,16 @@ import {
 import { Link } from "react-router-dom";
 import Menu from "./Menu";
 import { CgClose } from "react-icons/cg";
+import useAuth from "../../hooks/useAuth";
 
-const Sidebar = ({ menu, dark, setDark }) => {
+const Sidebar = ({ dark, setDark }) => {
+  const { user, logOut, showToast } = useAuth();
+  const handleLogout = () => {
+    logOut()
+      .then(() => showToast("Logged Out Successfully!", "info"))
+      .catch((error) => console.log(error));
+  };
+  //
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -213,17 +221,17 @@ const Sidebar = ({ menu, dark, setDark }) => {
                       </Link>
                     </li>
                     <li className="flex">
-                      <Link
+                      <button
                         className={`inline-flex gap-3 items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md ${
                           dark
                             ? "hover:bg-gray-800 hover:text-gray-200"
                             : "hover:bg-gray-100 hover:text-gray-800"
                         }`}
-                        to="/logout"
+                        onClick={handleLogout}
                       >
                         <FaDoorClosed />
                         <span>Log out</span>
-                      </Link>
+                      </button>
                     </li>
                   </ul>
                 )}

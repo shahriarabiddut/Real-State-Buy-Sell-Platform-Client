@@ -12,6 +12,10 @@ import Dashboard from "../layouts/Dashboard";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import UserHome from "../panels/User/UserHome";
+import AgentHome from "../panels/Agent/AgentHome";
+import AdminHome from "../panels/Admin/AdminHome";
+import ChosePurpose from "../pages/ChosePurpose";
 
 const urlHome = import.meta.env.VITE_URL;
 const router = createBrowserRouter([
@@ -26,6 +30,7 @@ const router = createBrowserRouter([
       { path: "/services", element: <Services /> },
       { path: "/properties", element: <Properties /> },
       { path: "/contact", element: <Contact /> },
+      { path: "/chosePurpose", element: <ChosePurpose /> },
     ],
   },
   {
@@ -42,7 +47,11 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <Dashboard />,
     errorElement: <ErrorPage />,
-    children: [],
+    children: [
+      { path: "/dashboard", element: <UserHome /> },
+      { path: "/dashboard/agentHome", element: <AgentHome /> },
+      { path: "/dashboard/adminHome", element: <AdminHome /> },
+    ],
   },
 ]);
 
