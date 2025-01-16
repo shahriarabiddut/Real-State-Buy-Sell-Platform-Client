@@ -2,10 +2,16 @@ import React from "react";
 import headerImg from "../assets/Main/headerBanner.jpg";
 import { Link } from "react-router-dom";
 import { FaChevronRight } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
 const BreadcumbBanner = ({ title }) => {
   return (
     <>
+      <Helmet>
+        <title>
+          {title} | {import.meta.env.VITE_NAME}
+        </title>
+      </Helmet>
       <section
         className="relative h-[80vh] pt-10"
         style={{

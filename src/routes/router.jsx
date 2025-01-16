@@ -16,6 +16,10 @@ import UserHome from "../panels/User/UserHome";
 import AgentHome from "../panels/Agent/AgentHome";
 import AdminHome from "../panels/Admin/AdminHome";
 import ChosePurpose from "../pages/ChosePurpose";
+import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import AgentRoute from "./AgentRoute";
+import UserRoute from "./UserRoute";
 
 const urlHome = import.meta.env.VITE_URL;
 const router = createBrowserRouter([
@@ -26,7 +30,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/about", element: <AboutUs /> },
-      { path: "/agent", element: <Agents /> },
+      { path: "/agents", element: <Agents /> },
       { path: "/services", element: <Services /> },
       { path: "/properties", element: <Properties /> },
       { path: "/contact", element: <Contact /> },
@@ -45,12 +49,37 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
     errorElement: <ErrorPage />,
     children: [
-      { path: "/dashboard", element: <UserHome /> },
-      { path: "/dashboard/agentHome", element: <AgentHome /> },
-      { path: "/dashboard/adminHome", element: <AdminHome /> },
+      {
+        path: "/dashboard",
+        element: (
+          <UserRoute>
+            <UserHome />
+          </UserRoute>
+        ),
+      },
+      {
+        path: "/dashboard/agentHome",
+        element: (
+          <AgentRoute>
+            <AgentHome />
+          </AgentRoute>
+        ),
+      },
+      {
+        path: "/dashboard/adminHome",
+        element: (
+          <AdminRoute>
+            <AdminHome />
+          </AdminRoute>
+        ),
+      },
     ],
   },
 ]);

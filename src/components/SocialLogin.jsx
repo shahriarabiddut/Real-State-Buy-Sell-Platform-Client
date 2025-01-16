@@ -50,9 +50,9 @@ const SocialLogin = ({ navigate, location, from }) => {
           //
           navigate("/chosePurpose");
         } else {
+          signInTimeUpdate(currentUser, currentUser.email);
           navigate(from, { replace: true });
         }
-        signInTimeUpdate(currentUser, currentUser.email);
       })
       .catch((error) => {
         console.log(error);

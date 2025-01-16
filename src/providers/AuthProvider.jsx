@@ -13,6 +13,7 @@ import app from "../firebase/firebase.config";
 import Swal from "sweetalert2";
 import { toast, ToastContainer } from "react-toastify";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import Loading from "../components/Loading";
 
 const auth = getAuth(app);
 export const AuthContext = createContext(null);
@@ -84,38 +85,39 @@ const AuthProvider = ({ children }) => {
     }
   };
   //
-  //   useEffect(() => {
-  //     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-  //       setUser(currentUser);
-  //       console.log("Current User : ", currentUser?.email);
-  //       // console.log(auth.currentUser.uid);
-  //       if (currentUser) {
-  //         // Get Token and Store in Client Side
-  //         const userInfo = { email: currentUser.email };
-  //         axiosPublic.post("/jwt", userInfo).then((res) => {
-  //           if (res.data.token) {
-  //             localStorage.setItem("access-token", res.data.token);
-  //             setLoading(false);
-  //           }
-  //         });
-  //       } else {
-  //         // Remove Token From Client Side
-  //         localStorage.removeItem("access-token");
-  //         setLoading(false);
-  //       }
-  //     });
-  //     return () => unsubscribe();
-  //   }, [axiosPublic]);
-  // Cleaner :
   useEffect(() => {
-    return onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false);
+      console.log("Current User : ", currentUser?.email);
+      // console.log(auth.currentUser.uid);
+      if (currentUser) {
+        // Get Token and Store in Client Side
+        const userInfo = { email: currentUser.email };
+        axiosPublic.post("/jwt", userInfo).then((res) => {
+          if (res.data.token) {
+            localStorage.setItem("access-token", res.data.token);
+            setLoading(false);
+          }
+        });
+      } else {
+        // Remove Token From Client Side
+        localStorage.removeItem("access-token");
+        setLoading(false);
+      }
     });
-  }, []);
+    return () => unsubscribe();
+  }, [axiosPublic]);
+  // Cleaner :
+  // useEffect(() => {
+  //   return onAuthStateChanged(auth, (currentUser) => {
+  //     setUser(currentUser);
+  //     setLoading(false);
+  //   });
+  // }, []);
   const authInfo = {
     user,
     loading,
+    setLoading,
     createUser,
     signIn,
     logOut,
@@ -124,6 +126,9 @@ const AuthProvider = ({ children }) => {
     updateUserProfile,
     googleSignIn,
   };
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <AuthContext.Provider value={authInfo}>
       {children}

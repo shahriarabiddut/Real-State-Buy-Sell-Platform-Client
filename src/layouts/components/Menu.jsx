@@ -1,9 +1,18 @@
 import React from "react";
-import { FaWpforms } from "react-icons/fa";
-import { MdDashboard } from "react-icons/md";
+import { FaHome, FaMagento } from "react-icons/fa";
+import {
+  MdDashboard,
+  MdOutlineRealEstateAgent,
+  MdOutlineSupportAgent,
+} from "react-icons/md";
 import { NavLink } from "react-router-dom";
 
 const Menu = ({ dark }) => {
+  const menuCss = ({ isActive }) =>
+    `inline-flex items-center w-full text-sm font-semibold ${
+      dark ? "hover:text-gray-200" : "hover:text-gray-800"
+    } ${isActive ? "border-l-4 pl-1 border-l-firstBg " : ""}`;
+
   return (
     <div className={`py-4 ${dark ? "text-gray-400" : "text-gray-500"}`}>
       <NavLink
@@ -16,31 +25,34 @@ const Menu = ({ dark }) => {
       </NavLink>
       <ul className="mt-6">
         <li className="relative px-6 py-3">
-          <span
-            className="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
-            aria-hidden="true"
-          ></span>
-          <NavLink
-            to={`/dashboard`}
-            className={`inline-flex items-center w-full text-sm font-semibold ${
-              dark ? "hover:text-gray-200" : "hover:text-gray-800"
-            }`}
-          >
+          <NavLink to={`/dashboard`} className={menuCss}>
             <MdDashboard className="text-xl" />
             <span className="ml-4">Dashboard</span>
           </NavLink>
         </li>
-      </ul>
-      <ul>
+        <div className="divider"></div>
         <li className="relative px-6 py-3">
-          <NavLink
-            to="/forms"
-            className={`inline-flex items-center w-full text-sm font-semibold  ${
-              dark ? "hover:text-gray-200" : "hover:text-gray-800 "
-            }`}
-          >
-            <FaWpforms className="text-xl" />
-            <span className="ml-4">Forms</span>
+          <NavLink to={`/`} className={menuCss}>
+            <FaHome className="text-xl" />
+            <span className="ml-4">Home</span>
+          </NavLink>
+        </li>
+        <li className="relative px-6 py-3">
+          <NavLink to={`/properties`} className={menuCss}>
+            <MdOutlineRealEstateAgent className="text-xl" />
+            <span className="ml-4">Properties</span>
+          </NavLink>
+        </li>
+        <li className="relative px-6 py-3">
+          <NavLink to={`/agents`} className={menuCss}>
+            <FaMagento className="text-xl" />
+            <span className="ml-4">Agents</span>
+          </NavLink>
+        </li>
+        <li className="relative px-6 py-3">
+          <NavLink to={`/contact`} className={menuCss}>
+            <MdOutlineSupportAgent className="text-xl" />
+            <span className="ml-4">Contact</span>
           </NavLink>
         </li>
       </ul>

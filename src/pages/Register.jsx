@@ -11,7 +11,7 @@ import authImg from "../assets/register.gif";
 import useAuth from "../hooks/useAuth";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 
-const SignUp = () => {
+const Register = () => {
   const captchaRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
   const navigate = useNavigate();
@@ -90,7 +90,7 @@ const SignUp = () => {
           </div>
           <div className="card bg-base-100 w-full lg:w-1/2 md:w-1/2 shadow-2xl">
             <h1 className="text-5xl font-bold pt-5 font-poppins text-center">
-              SignUp
+              Register
             </h1>
             <form className="card-body py-5" onSubmit={handleSubmit(onSubmit)}>
               <div className="form-control">
@@ -200,7 +200,7 @@ const SignUp = () => {
                   disabled={disabled}
                   type="submit"
                   className="btn bg-firstBg text-white"
-                  value="SignUp"
+                  value="Register"
                 />
               </div>
             </form>
@@ -221,4 +221,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Register;

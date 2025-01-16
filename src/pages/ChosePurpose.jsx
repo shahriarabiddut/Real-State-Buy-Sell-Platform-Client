@@ -1,28 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import BreadcumbBanner from "../components/BreadcumbBanner";
 import useAuth from "../hooks/useAuth";
-import useAxiosPublic from "../hooks/useAxiosPublic";
-import { useNavigate } from "react-router-dom";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const ChosePurpose = () => {
-  // TODO : Secure
-  const axiosPublic = useAxiosPublic();
   const { user, showToast } = useAuth();
+  const axiosSecure = useAxiosSecure();
+
+  console.log(user.email);
   const navigate = useNavigate();
   // Check user Already have role or not
-  axiosPublic
-    .get(`/user/${user?.email}`)
-    .then((response) => {
-      if (response.role != "notMentioned") {
-        showToast("You cannot Change Role!", "error");
-        navigate("/");
-      }
-    })
-    .catch((error) => {
-      // console.error("Error updating user role:", error);
-    });
+  useEffect(() => {
+    setTimeout(() => {
+      axiosSecure
+        .get(`/user/${user?.email}`)
+        .then((response) => {
+          console.log(response.data.role, user?.email);
+          if (
+            response.data.role != null &&
+            response.data.role != "notMentioned"
+          ) {
+            showToast("You cannot Change Role!", "error");
+            navigate("/");
+          }
+        })
+        .catch((error) => {
+          // console.error("Error updating user role:", error);
+        });
+    }, 3000);
+  }, []);
+
   //
 
   const {
@@ -40,7 +50,7 @@ const ChosePurpose = () => {
       role: data.role,
       updatedAt,
     };
-    axiosPublic
+    axiosSecure
       .patch(`/userRole`, updateRole)
       .then((response) => {
         // console.log(response);
@@ -50,7 +60,11 @@ const ChosePurpose = () => {
         }
       })
       .catch((error) => {
-        showToast("You cannot change role Again!", "error");
+        if (error.status == 401) {
+          showToast("You don't Have Permission!", "error");
+        } else {
+          showToast("You cannot change role Again!", "error");
+        }
       });
   };
 

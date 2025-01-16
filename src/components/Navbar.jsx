@@ -4,6 +4,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import profileError from "../assets/profileError.png";
 import { MdDashboard } from "react-icons/md";
+import useRole from "../hooks/useRole";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -12,7 +13,7 @@ const Navbar = () => {
   const authPath = location.pathname.includes("/auth");
   const cssClass =
     "cursor-pointer rounded-xl hover:border-b-2 hover:border-white p-2";
-  const { user, logOut, showToast } = useAuth();
+  const { user, logOut, showToast, loading } = useAuth();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const toggleProfile = () => setIsProfileOpen(!isProfileOpen);
   const handleLogout = () => {
@@ -23,6 +24,11 @@ const Navbar = () => {
   const handleImageError = (e, imageError) => {
     e.target.src = imageError;
   };
+  // Get the User Role
+  const [isRole] = useRole();
+  // console.log(isRole);
+
+  //
   const cssUser = `inline-flex gap-3 items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-800 hover:text-white`;
   const links = (
     <>
@@ -42,7 +48,7 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to={"/agent"}
+          to={"/agents"}
           className={cssClass}
           onClick={() => setIsOpen(false)}
         >
@@ -104,10 +110,24 @@ const Navbar = () => {
                   aria-label="submenu"
                 >
                   <li className="flex">
-                    <Link className={cssUser} to={`/dashboard`}>
-                      <MdDashboard />
-                      <span>Dashboard</span>
-                    </Link>
+                    {isRole === "admin" && (
+                      <Link className={cssUser} to={`/dashboard/adminHome`}>
+                        <MdDashboard />
+                        <span>Dashboard</span>
+                      </Link>
+                    )}
+                    {isRole === "agent" && (
+                      <Link className={cssUser} to={`/dashboard/agentHome`}>
+                        <MdDashboard />
+                        <span>Dashboard</span>
+                      </Link>
+                    )}
+                    {(isRole === "user" || isRole === "notMentioned") && (
+                      <Link className={cssUser} to={`/dashboard`}>
+                        <MdDashboard />
+                        <span>Dashboard</span>
+                      </Link>
+                    )}
                   </li>
                   <li className="flex">
                     <button className={cssUser} onClick={handleLogout}>
@@ -163,19 +183,22 @@ const Navbar = () => {
             {import.meta.env.VITE_NAME}
           </NavLink>
           <ul
-            className={`hidden text-xl md:flex space-x-1 font-poppins text-white `}
+            className={`hidden text-xl lg:flex space-x-1 font-poppins text-white `}
           >
             {links}
           </ul>
           <button
-            className="cursor-pointer bg-slate-100 p-2 rounded-xl md:hidden flex items-center space-x-4"
+            className="cursor-pointer bg-slate-100 p-2 rounded-xl lg:hidden flex items-center space-x-4"
             onClick={() => setIsOpen(!isOpen)}
           >
-            {isOpen ? "X" : <FaBars />}
+            <span className="sm:text-xl md:text-2xl">
+              {" "}
+              {isOpen ? "X" : <FaBars />}{" "}
+            </span>
           </button>
         </div>
         {/* Mobile Nav */}
-        <div className="">
+        <div className="lg:hidden flex">
           <div
             className={`${
               isOpen ? "flex justify-center" : "hidden"
