@@ -1,10 +1,10 @@
 import React from "react";
-import about1 from "../../../assets/about.jpg";
-import about2 from "../../../assets/about-2.jpg";
+import about1 from "../assets/about.jpg";
+import about2 from "../assets/about-2.jpg";
 
 const About = () => {
   return (
-    <section className="py-20 w-11/12 mx-auto">
+    <section className=" w-11/12 mx-auto">
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row-reverse gap-4 md:gap-0">
           <div className="w-full md:w-3/5 grid grid-cols-2 justify-between gap-1">

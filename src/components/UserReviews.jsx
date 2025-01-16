@@ -3,9 +3,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
-import profileError from "../../../assets/profileError.png";
+import profileError from "../assets/profileError.png";
 import { FaQuoteLeft } from "react-icons/fa";
-import SectionTitle from "../../../components/SectionTitle";
+import SectionTitle from "./SectionTitle";
 
 const reviews = [
   {

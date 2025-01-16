@@ -4,12 +4,15 @@ import { FaHandshake } from "react-icons/fa";
 import { IoBusiness } from "react-icons/io5";
 import { MdRealEstateAgent } from "react-icons/md";
 
-const FourCards = () => {
+const FourCards = ({ home }) => {
+  const secCss = home
+    ? "bg-green-500 py-8 lg:pt-36 lg:-top-40 lg:relative "
+    : "bg-green-500 py-20 lg:relative ";
   return (
-    <section className="bg-green-500 py-8 lg:pt-36 lg:-top-40 lg:relative ">
+    <section className={secCss}>
       <div className="container mx-auto w-11/12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:gap-1">
-          <div className="bg-green-500 text-white hover:bg-green-800 text-center p-6 flex flex-col justify-between h-full rounded-lg shadow-lg">
+          <div className="bg-green-600 text-white hover:bg-green-900 text-center p-6 flex flex-col justify-between h-full rounded-lg shadow-lg">
             <div className="mb-4">
               <div className="flex justify-center items-center mb-4">
                 <span className="text-4xl text-white">
@@ -25,7 +28,7 @@ const FourCards = () => {
               </p>
             </div>
           </div>
-          <div className="bg-green-600 text-white hover:bg-green-800 text-center p-6 flex flex-col justify-between h-full rounded-lg shadow-lg">
+          <div className="bg-green-700 text-white hover:bg-green-900 text-center p-6 flex flex-col justify-between h-full rounded-lg shadow-lg">
             <div className="mb-4">
               <div className="flex justify-center items-center mb-4">
                 <span className="text-4xl text-white">
@@ -41,7 +44,7 @@ const FourCards = () => {
               </p>
             </div>
           </div>
-          <div className="bg-green-400 text-white hover:bg-green-800 text-center p-6 flex flex-col justify-between h-full rounded-lg shadow-lg">
+          <div className="bg-green-700 text-white hover:bg-green-900 text-center p-6 flex flex-col justify-between h-full rounded-lg shadow-lg">
             <div className="mb-4">
               <div className="flex justify-center items-center mb-4">
                 <span className="text-4xl text-white">
@@ -57,7 +60,7 @@ const FourCards = () => {
               </p>
             </div>
           </div>
-          <div className="bg-green-500 text-white hover:bg-green-800 text-center p-6 flex flex-col justify-between h-full rounded-lg shadow-lg">
+          <div className="bg-green-600 text-white hover:bg-green-900 text-center p-6 flex flex-col justify-between h-full rounded-lg shadow-lg">
             <div className="mb-4">
               <div className="flex justify-center items-center mb-4">
                 <span className="text-4xl text-white">

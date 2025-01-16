@@ -1,6 +1,6 @@
 import React from "react";
-import SectionTitle from "../../../components/SectionTitle";
-import blob from "../../../assets/blob.png";
+import SectionTitle from "./SectionTitle";
+import blob from "../assets/blob.png";
 
 const WorkFlow = () => {
   return (

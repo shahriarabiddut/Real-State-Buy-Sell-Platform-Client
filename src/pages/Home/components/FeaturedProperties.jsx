@@ -76,7 +76,7 @@ const FeaturedProperties = () => {
 
   return (
     <>
-      <div className="container mx-auto w-11/12 py-20 lg:-mt-24 lg:py-10 lg:mb-14 ">
+      <section className="container mx-auto w-11/12 py-20 lg:-mt-24 lg:py-10 lg:mb-14 ">
         <SectionTitle
           title={"Featured Properties"}
           subTitle={"What we offer"}
@@ -136,7 +136,7 @@ const FeaturedProperties = () => {
           ))}
         </div>
         {/* TODO: Using Swiper JS Slide 12 properties */}
-      </div>
+      </section>
     </>
   );
 };
