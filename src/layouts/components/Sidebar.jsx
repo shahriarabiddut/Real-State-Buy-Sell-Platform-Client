@@ -9,6 +9,8 @@ import {
   FaUser,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Menu from "./Menu";
+import { CgClose } from "react-icons/cg";
 
 const Sidebar = ({ menu, dark, setDark }) => {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
@@ -57,11 +59,10 @@ const Sidebar = ({ menu, dark, setDark }) => {
           }`}
         >
           <button
-            ref={sideMenuRef}
             className="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none"
             onClick={toggleSideMenu}
           >
-            <FaBars />
+            {!isSideMenuOpen ? <FaBars /> : <CgClose />}
           </button>
           <ul className="flex items-end flex-shrink-0 space-x-6 ">
             {/* <!-- Theme toggler --> */}
@@ -159,6 +160,7 @@ const Sidebar = ({ menu, dark, setDark }) => {
                 )}
               </div>
             </li>
+            {/* Profile Menu */}
             <li className="relative">
               <button
                 className="align-middle rounded-full focus:shadow-outline-purple focus:outline-none"
@@ -167,7 +169,7 @@ const Sidebar = ({ menu, dark, setDark }) => {
                 onClick={toggleProfile}
               >
                 <img
-                  className="object-cover w-8 h-8 rounded-full"
+                  className="object-cover w-6 h-6 rounded-full"
                   src="https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=aa3a807e1bbdfd4364d1f449eaa96d82"
                   alt=""
                   aria-hidden="true"
@@ -240,7 +242,7 @@ const Sidebar = ({ menu, dark, setDark }) => {
             : "-translate-x-64 opacity-0"
         } md:hidden`}
       >
-        {menu}
+        <Menu dark={dark} />
       </aside>
     </>
   );

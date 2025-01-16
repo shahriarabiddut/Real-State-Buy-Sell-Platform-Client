@@ -7,14 +7,18 @@ import Agents from "../pages/Agents";
 import Services from "../pages/Services";
 import Properties from "../pages/Properties";
 import Contact from "../pages/Contact";
+import ErrorPage from "../pages/ErrorPage";
 import Dashboard from "../layouts/Dashboard";
+import AuthLayout from "../layouts/AuthLayout";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
 
 const urlHome = import.meta.env.VITE_URL;
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
-    errorElement: <h1 className="text-red-500">Error! Not Found</h1>,
+    errorElement: <ErrorPage />,
     children: [
       { path: "/", element: <Home /> },
       { path: "/about", element: <AboutUs /> },
@@ -25,9 +29,19 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: "/auth",
+    element: <AuthLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      { path: "/auth", element: <Login /> },
+      { path: "/auth/login", element: <Login /> },
+      { path: "/auth/register", element: <Register /> },
+    ],
+  },
+  {
     path: "/dashboard",
     element: <Dashboard />,
-    errorElement: <h1 className="text-red-500">Error! Not Found</h1>,
+    errorElement: <ErrorPage />,
     children: [],
   },
 ]);

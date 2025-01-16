@@ -5,6 +5,8 @@ import { NavLink, useLocation } from "react-router-dom";
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const authPath = location.pathname.includes("/auth");
   const cssClass =
     "cursor-pointer rounded-xl hover:border-b-2 hover:border-white p-2";
   const links = (
@@ -62,7 +64,7 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to={"/login"}
+          to={"/auth/login"}
           className={cssClass}
           onClick={() => setIsOpen(false)}
         >
@@ -89,7 +91,9 @@ const Navbar = () => {
     <>
       <nav
         className={`fixed top-0 left-0 w-full z-20 transition-all duration-300 ${
-          isScrolled
+          authPath
+            ? "bg-firstBg shadow-md py-1 bg-opacity-95"
+            : isScrolled
             ? "bg-firstBg shadow-md py-1 bg-opacity-95"
             : "bg-transparent py-6"
         }`}
