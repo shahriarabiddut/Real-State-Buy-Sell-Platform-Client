@@ -21,6 +21,7 @@ export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [dark, setDark] = useState(false);
   const provider = new GoogleAuthProvider();
   const axiosPublic = useAxiosPublic();
 
@@ -125,6 +126,8 @@ const AuthProvider = ({ children }) => {
     sweetAlert,
     updateUserProfile,
     googleSignIn,
+    dark,
+    setDark,
   };
   if (loading) {
     return <Loading />;

@@ -30,7 +30,7 @@ const Menu = ({ dark }) => {
             <span className="ml-4">Dashboard</span>
           </NavLink>
         </li>
-        <div className="divider"></div>
+        <div className={`divider ${dark ? "" : ""}`}></div>
         <li className="relative px-6 py-3">
           <NavLink to={`/`} className={menuCss}>
             <FaHome className="text-xl" />

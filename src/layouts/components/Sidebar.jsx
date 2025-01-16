@@ -12,13 +12,17 @@ import { Link } from "react-router-dom";
 import Menu from "./Menu";
 import { CgClose } from "react-icons/cg";
 import useAuth from "../../hooks/useAuth";
+import profileError from "../../assets/profileError.png";
 
-const Sidebar = ({ dark, setDark }) => {
-  const { user, logOut, showToast } = useAuth();
+const Sidebar = () => {
+  const { user, logOut, showToast, dark, setDark } = useAuth();
   const handleLogout = () => {
     logOut()
       .then(() => showToast("Logged Out Successfully!", "info"))
       .catch((error) => console.log(error));
+  };
+  const handleImageError = (e) => {
+    e.target.src = profileError;
   };
   //
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
@@ -63,7 +67,7 @@ const Sidebar = ({ dark, setDark }) => {
       >
         <div
           className={`container flex items-center justify-between md:justify-end h-full px-6 mx-auto  ${
-            dark ? "text-purple-300" : "text-purple-600"
+            dark ? "text-green-300" : "text-green-600"
           }`}
         >
           <button
@@ -178,8 +182,9 @@ const Sidebar = ({ dark, setDark }) => {
               >
                 <img
                   className="object-cover w-6 h-6 rounded-full"
-                  src="https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=aa3a807e1bbdfd4364d1f449eaa96d82"
-                  alt=""
+                  src={user.photoURL}
+                  onError={(e) => handleImageError(e)}
+                  alt={user.displayName}
                   aria-hidden="true"
                 />
               </button>
@@ -201,23 +206,10 @@ const Sidebar = ({ dark, setDark }) => {
                             ? "hover:bg-gray-800 hover:text-gray-200"
                             : "hover:bg-gray-100 hover:text-gray-800"
                         }`}
-                        to="/profile"
+                        to={`/dashboard/profile`}
                       >
                         <FaUser />
                         <span>Profile</span>
-                      </Link>
-                    </li>
-                    <li className="flex">
-                      <Link
-                        className={`inline-flex gap-3 items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md ${
-                          dark
-                            ? "hover:bg-gray-800 hover:text-gray-200"
-                            : "hover:bg-gray-100 hover:text-gray-800"
-                        }`}
-                        to="/settings"
-                      >
-                        <FaCog />
-                        <span>Settings</span>
                       </Link>
                     </li>
                     <li className="flex">

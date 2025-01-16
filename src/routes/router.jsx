@@ -20,6 +20,8 @@ import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import AgentRoute from "./AgentRoute";
 import UserRoute from "./UserRoute";
+import Profile from "../panels/Profile";
+import UpdateProfile from "../panels/UpdateProfile";
 
 const urlHome = import.meta.env.VITE_URL;
 const router = createBrowserRouter([
@@ -56,6 +58,16 @@ const router = createBrowserRouter([
     ),
     errorElement: <ErrorPage />,
     children: [
+      // Common Routes
+      {
+        path: "/dashboard/profile",
+        element: <Profile />,
+      },
+      {
+        path: "/dashboard/profile/update",
+        element: <UpdateProfile />,
+      },
+      // User Routes
       {
         path: "/dashboard",
         element: (
@@ -64,6 +76,7 @@ const router = createBrowserRouter([
           </UserRoute>
         ),
       },
+      // Agent Routes
       {
         path: "/dashboard/agentHome",
         element: (
@@ -72,6 +85,7 @@ const router = createBrowserRouter([
           </AgentRoute>
         ),
       },
+      // Admin Routes
       {
         path: "/dashboard/adminHome",
         element: (
