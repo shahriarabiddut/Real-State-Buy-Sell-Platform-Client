@@ -7,6 +7,7 @@ import Agents from "../pages/Agents";
 import Services from "../pages/Services";
 import Properties from "../pages/Properties";
 import Contact from "../pages/Contact";
+import Dashboard from "../layouts/Dashboard";
 
 const urlHome = import.meta.env.VITE_URL;
 const router = createBrowserRouter([
@@ -22,6 +23,12 @@ const router = createBrowserRouter([
       { path: "/properties", element: <Properties /> },
       { path: "/contact", element: <Contact /> },
     ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+    errorElement: <h1 className="text-red-500">Error! Not Found</h1>,
+    children: [],
   },
 ]);
 
