@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
-import SectionTitle from "../components/SectionTitle";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import PageTitle from "../layouts/components/PageTitle";
 
 const UpdateProfile = () => {
   const [serverUser, setServerUser] = useState([]);
@@ -54,13 +53,10 @@ const UpdateProfile = () => {
   }, [user]);
   return (
     <div className="min-h-fit flex justify-center items-center py-10">
-      <Helmet>
-        <title>Update Profile | {import.meta.env.VITE_NAME}</title>
-      </Helmet>
       <div className="w-10/12 md:w-9/12 lg:w-4/6 mx-auto my-4">
-        <SectionTitle
-          title={"Profile"}
-          subTitle={"User Profile"}
+        <PageTitle
+          title={"Update Profile"}
+          subTitle={"Edit Profile Data"}
           color={fontColor}
         />
         <div className="mx-auto">

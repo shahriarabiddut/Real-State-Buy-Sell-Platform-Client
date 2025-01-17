@@ -62,7 +62,7 @@ const Login = () => {
         <title>Login | {import.meta.env.VITE_NAME}</title>
       </Helmet>
       <div className="hero bg-base-200 min-h-screen py-20">
-        <div className="hero-content flex-col lg:flex-row md:flex-row p-10 m-10 border-2 shadow-2xl">
+        <div className="hero-content flex-col lg:flex-row md:flex-row p-10 m-10 border-2 shadow-2xl w-11/12">
           <div className="text-center lg:text-left w-full lg:w-1/2 md:w-1/2">
             <img src={authImg} alt="" />
           </div>

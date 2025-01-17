@@ -23,6 +23,7 @@ const Navbar = () => {
   };
   const handleImageError = (e, imageError) => {
     e.target.src = imageError;
+    e.target.onerror = null;
   };
   // Get the User Role
   const [isRole] = useRole();

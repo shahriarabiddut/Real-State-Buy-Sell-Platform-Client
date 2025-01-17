@@ -22,6 +22,10 @@ import AgentRoute from "./AgentRoute";
 import UserRoute from "./UserRoute";
 import Profile from "../panels/Profile";
 import UpdateProfile from "../panels/UpdateProfile";
+import AddProperty from "../panels/Agent/AddProperty";
+import MyProperty from "../panels/Agent/MyProperty";
+import SoldProperties from "../panels/Agent/SoldProperties";
+import RequestedProperty from "../panels/Agent/RequestedProperty";
 
 const urlHome = import.meta.env.VITE_URL;
 const router = createBrowserRouter([
@@ -82,6 +86,38 @@ const router = createBrowserRouter([
         element: (
           <AgentRoute>
             <AgentHome />
+          </AgentRoute>
+        ),
+      },
+      {
+        path: "/dashboard/agent/addProperty",
+        element: (
+          <AgentRoute>
+            <AddProperty />
+          </AgentRoute>
+        ),
+      },
+      {
+        path: "/dashboard/agent/myProperties",
+        element: (
+          <AgentRoute>
+            <MyProperty />
+          </AgentRoute>
+        ),
+      },
+      {
+        path: "/dashboard/agent/soldProperties",
+        element: (
+          <AgentRoute>
+            <SoldProperties />
+          </AgentRoute>
+        ),
+      },
+      {
+        path: "/dashboard/agent/requestedProperties",
+        element: (
+          <AgentRoute>
+            <RequestedProperty />
           </AgentRoute>
         ),
       },

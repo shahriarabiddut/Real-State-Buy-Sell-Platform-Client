@@ -23,6 +23,7 @@ const Sidebar = () => {
   };
   const handleImageError = (e) => {
     e.target.src = profileError;
+    e.target.onerror = null;
   };
   //
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);

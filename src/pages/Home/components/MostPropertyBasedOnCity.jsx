@@ -26,6 +26,7 @@ const MostPropertyBasedOnCity = () => {
   ];
   const handleImageError = (e) => {
     e.target.src = placeError;
+    e.target.onerror = null;
   };
 
   return (

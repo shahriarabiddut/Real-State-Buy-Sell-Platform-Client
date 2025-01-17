@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
 import { FaEdit } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-import SectionTitle from "../components/SectionTitle";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import PageTitle from "../layouts/components/PageTitle";
 
 const Profile = () => {
   const [serverUser, setServerUser] = useState([]);
@@ -19,13 +18,10 @@ const Profile = () => {
   }, []);
   return (
     <div>
-      <Helmet>
-        <title>Profile | {import.meta.env.VITE_NAME}</title>
-      </Helmet>
       <section className="mx-auto w-11/12">
         <div className=" min-h-screen my-10 ">
           <div className="lg:w-6/12 md:w-8/12 w-full mx-auto grid gap-4 mb-4">
-            <SectionTitle
+            <PageTitle
               title={"Profile"}
               subTitle={"User Profile"}
               color={fontColor}
@@ -44,8 +40,13 @@ const Profile = () => {
                 {serverUser.name}
               </h2>
               <p className="font-semibold">{serverUser.email}</p>
+              {serverUser?.role != "user" && (
+                <p className="font-semibold capitalize">
+                  User Type : {serverUser.role}
+                </p>
+              )}
               <p className="text-justify text-white">
-                {serverUser.bio == null ? "Add Bio" : serverUser?.bio}
+                {serverUser?.bio == null ? "Add Bio" : serverUser?.bio}
               </p>
               <div className="card-actions justify-center mt-4">
                 <NavLink to={"/dashboard/profile/update"}>
