@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PageTitle from "../../layouts/components/PageTitle";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -6,62 +6,106 @@ import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 import Swal from "sweetalert2";
+import { useLoaderData } from "react-router-dom";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
-const AddProperty = () => {
+const EditProperty = () => {
+  const { _id, image, title, minPrice, maxPrice, area, location } =
+    useLoaderData();
   const { user, dark } = useAuth();
-  const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
-  const { register, handleSubmit, reset } = useForm();
+  const axiosSecure = useAxiosSecure();
+  const [newImage, setNewImage] = useState(image);
+  const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
-    // Upload image to imgbb
-    const imageFIle = { image: data.image[0] };
-    const res = await axiosPublic
-      .post(image_hosting_api, imageFIle, {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-      })
-      .then(async (res) => {
-        //   console.log(res.data.data);
-        if (res.data.success) {
-          // Prepare data To Send the data to mongoDB
-          const property = {
-            title: data.title,
-            location: data.location,
-            image: res.data.data.display_url,
-            deleteUrl: res.data.data.delete_url,
-            agentName: data.agentName,
-            agentEmail: data.agentEmail,
-            minPrice: parseFloat(data.minPrice),
-            maxPrice: parseFloat(data.maxPrice),
-            area: parseFloat(data.area),
-          };
-          //   Now Send the Data
-          const propertyRes = await axiosSecure.post(`/property`, property);
-          console.log(propertyRes.data);
-          if (propertyRes.data.insertedId) {
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "Your Property has been Added!",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-            // Reset the form after submission
-            reset();
+    if (data.imageNew.length !== 0) {
+      // Upload image to imgbb
+      const imageFIle = { image: data.imageNew[0] };
+      const res = await axiosPublic
+        .post(image_hosting_api, imageFIle, {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        })
+        .then(async (res) => {
+          console.log(res.data.data);
+          if (res.data.success) {
+            // Prepare data To Send the data to mongoDB
+            const property = {
+              title: data.title,
+              location: data.location,
+              image: res.data.data.display_url,
+              agentName: data.agentName,
+              agentEmail: data.agentEmail,
+              minPrice: parseFloat(data.minPrice),
+              maxPrice: parseFloat(data.maxPrice),
+              area: parseFloat(data.area),
+            };
+            setNewImage(res.data.data.display_url);
+            //   Now Send the Data
+            const propertyRes = await axiosSecure.patch(
+              `/property/${_id}`,
+              property
+            );
+            console.log(propertyRes.data);
+            if (propertyRes.data.modifiedCount > 0) {
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your Property has been Updated",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
           }
-        }
-      });
+        });
+    } else {
+      // Prepare data To Send the data to mongoDB
+      const property = {
+        title: data.title,
+        location: data.location,
+        image: image,
+        agentName: data.agentName,
+        agentEmail: data.agentEmail,
+        minPrice: parseFloat(data.minPrice),
+        maxPrice: parseFloat(data.maxPrice),
+        area: parseFloat(data.area),
+      };
+      console.log("hit");
+      //   Now Send the Data
+      const propertyRes = await axiosSecure.patch(`/property/${_id}`, property);
+      console.log(propertyRes.data);
+      if (propertyRes.data.modifiedCount > 0) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your Property has been Updated",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+      if (
+        propertyRes.data.modifiedCount == 0 &&
+        propertyRes.data.matchedCount > 0
+      ) {
+        Swal.fire({
+          position: "top-end",
+          icon: "info",
+          title: "Nothing New To Update!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    }
   };
   const fontColor = dark ? "white" : "black";
   return (
     <>
       <section className="w-11/12 mx-auto py-10">
         <PageTitle
-          title={"Add Property"}
+          title={"Update Property"}
           subTitle={"Propety Datas Are Cross Checked!"}
           color={fontColor}
         />
@@ -81,6 +125,7 @@ const AddProperty = () => {
                 type="text"
                 placeholder="Enter Property title"
                 className="input input-bordered"
+                defaultValue={title}
                 {...register("title", { required: true })}
                 required
               />
@@ -95,21 +140,22 @@ const AddProperty = () => {
                 type="text"
                 placeholder="Enter Property Location"
                 className="input input-bordered"
+                defaultValue={location}
                 {...register("location", { required: true })}
                 required
               />
             </div>
             <div className="form-control">
+              <img src={newImage} className="w-64 h-64" alt="" /> <br />
               <label className="label">
                 <span className={`font-sans text-lg text-${fontColor}`}>
-                  Property Image
+                  Want To Add New Property Image ?
                 </span>
               </label>
               <input
                 type="file"
                 className="file-input input-bordered w-full"
-                {...register("image", { required: true })}
-                required
+                {...register("imageNew")}
               />
             </div>
             <div className="form-control">
@@ -150,6 +196,7 @@ const AddProperty = () => {
                 <input
                   type="number"
                   placeholder="Min Price"
+                  defaultValue={minPrice}
                   className="input input-bordered"
                   {...register("minPrice", { required: true })}
                   required
@@ -164,6 +211,7 @@ const AddProperty = () => {
                 <input
                   type="number"
                   placeholder="Max Price"
+                  defaultValue={maxPrice}
                   className="input input-bordered"
                   {...register("maxPrice", { required: true })}
                   required
@@ -173,13 +221,14 @@ const AddProperty = () => {
             <div className="form-control">
               <label className="label">
                 <span className={`font-sans text-lg text-${fontColor}`}>
-                  Property Area
+                  Property Area (in sqft)
                 </span>
               </label>
               <input
-                type="text"
+                type="number"
                 placeholder="in sqft"
                 className="input input-bordered"
+                defaultValue={area}
                 {...register("area", { required: true })}
                 required
               />
@@ -188,7 +237,7 @@ const AddProperty = () => {
               <input
                 type="submit"
                 className="btn bg-firstBg border-white hover:bg-gray-100 hover:text-firstBg text-white "
-                value="Add Property"
+                value="Update Property"
               />
             </div>
           </form>
@@ -198,4 +247,4 @@ const AddProperty = () => {
   );
 };
 
-export default AddProperty;
+export default EditProperty;

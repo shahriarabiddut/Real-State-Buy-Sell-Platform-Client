@@ -26,6 +26,7 @@ import AddProperty from "../panels/Agent/AddProperty";
 import MyProperty from "../panels/Agent/MyProperty";
 import SoldProperties from "../panels/Agent/SoldProperties";
 import RequestedProperty from "../panels/Agent/RequestedProperty";
+import EditProperty from "../panels/Agent/EditProperty";
 
 const urlHome = import.meta.env.VITE_URL;
 const router = createBrowserRouter([
@@ -96,6 +97,16 @@ const router = createBrowserRouter([
             <AddProperty />
           </AgentRoute>
         ),
+      },
+      {
+        path: "/dashboard/agent/updateProperty/:id",
+        element: (
+          <AgentRoute>
+            <EditProperty />
+          </AgentRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_URL}/property/${params.id}`),
       },
       {
         path: "/dashboard/agent/myProperties",
