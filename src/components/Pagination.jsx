@@ -34,7 +34,7 @@ const Pagination = ({
       {/* Previous Button */}
       <button
         onClick={handlePrevPage}
-        className={`bg-blue-500 text-white border-blue-500 inline-flex p-2 rounded-md border items-center gap-2 ${
+        className={`bg-green-500 text-white border-green-500 inline-flex p-2 rounded-md border items-center gap-2 ${
           currentPage === 0 ? "opacity-50 cursor-not-allowed" : ""
         }`}
         disabled={currentPage === 0}
@@ -47,8 +47,10 @@ const Pagination = ({
       {pages.map((page) => (
         <button
           className={`${
-            currentPage === page ? "bg-blue-500 text-white border-blue-500" : ""
-          } p-2 rounded-md border hover:bg-blue-100`}
+            currentPage === page
+              ? "bg-green-600 text-white border-green-500"
+              : "bg-green-100 text-gray-500"
+          } p-2 rounded-md border hover:bg-green-100`}
           onClick={() => setCurrentPage(page)}
           key={page}
           aria-label={`Page ${page + 1}`}
@@ -60,7 +62,7 @@ const Pagination = ({
       {/* Next Button */}
       <button
         onClick={handleNextPage}
-        className={`bg-blue-500 text-white border-blue-500 inline-flex p-2 rounded-md border items-center gap-2 ${
+        className={`bg-green-500 text-white border-green-500 inline-flex p-2 rounded-md border items-center gap-2 ${
           currentPage === pages.length - 1
             ? "opacity-50 cursor-not-allowed"
             : ""

@@ -42,24 +42,26 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
           </span>
         </div>
       </div>
-      <div className="p-4">
+      <div className="p-4 ">
         <ul className="flex justify-between text-sm text-gray-600 mb-4">
           <li className={`${dark ? "text-gray-200" : "text-gray-500"}`}>
             {area} sqft
           </li>
         </ul>
-        <Link to={`#`}>
-          <h3
-            className={`font-bold text-lg mb-1 hover:text-blue-500 ${
-              dark ? "text-gray-200" : "text-gray-900"
-            }`}
-          >
-            {title}
-          </h3>
-        </Link>
-        <p className={`text-sm ${dark ? "text-gray-200" : "text-gray-500"}`}>
-          {location}
-        </p>
+        <div className="min-h-18">
+          <Link to={`/property/${_id}`}>
+            <h3
+              className={`font-bold text-lg mb-1 hover:text-blue-500  ${
+                dark ? "text-gray-200" : "text-gray-900"
+              }`}
+            >
+              {title}
+            </h3>
+          </Link>
+          <p className={`text-sm ${dark ? "text-gray-200" : "text-gray-500"}`}>
+            {location}
+          </p>
+        </div>
         {userType === "agent" && (
           <>
             <div className="mt-4 flex justify-between items-center">
@@ -73,7 +75,7 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
               </div>
             </div>
             <div className="mt-4 flex justify-between items-center">
-              <NavLink to={`/dashboard/property/${_id}`}>
+              <NavLink to={`/property/${_id}`}>
                 <button className="inline-flex btn btn-sm btn-success text-white">
                   <FaEye />
                 </button>
@@ -93,6 +95,27 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
               >
                 <FaTrash />
               </button>
+            </div>
+          </>
+        )}
+        {userType === "home" && (
+          <>
+            <div className="mt-4 flex justify-between items-center">
+              <div className="flex items-center">
+                <img
+                  src={agent?.photo}
+                  alt={agentName}
+                  className="w-10 h-10 rounded-full object-cover mr-2"
+                />
+                <p className="text-lg font-medium">{agentName}</p>
+              </div>
+            </div>
+            <div className="my-2 mx-auto w-full">
+              <NavLink to={`/property/${_id}`}>
+                <button className="flex items-center btn btn-wide btn-success text-white ">
+                  <FaEye /> View Details
+                </button>
+              </NavLink>
             </div>
           </>
         )}

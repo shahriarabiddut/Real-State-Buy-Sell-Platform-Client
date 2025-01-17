@@ -27,6 +27,10 @@ import MyProperty from "../panels/Agent/MyProperty";
 import SoldProperties from "../panels/Agent/SoldProperties";
 import RequestedProperty from "../panels/Agent/RequestedProperty";
 import EditProperty from "../panels/Agent/EditProperty";
+import PropertyDetail from "../pages/PropertyDetail";
+import ManageProperties from "../panels/Admin/ManageProperties";
+import ManageUsers from "../panels/Admin/ManageUsers";
+import ManageReviews from "../panels/Admin/ManageReviews";
 
 const urlHome = import.meta.env.VITE_URL;
 const router = createBrowserRouter([
@@ -39,9 +43,33 @@ const router = createBrowserRouter([
       { path: "/about", element: <AboutUs /> },
       { path: "/agents", element: <Agents /> },
       { path: "/services", element: <Services /> },
-      { path: "/properties", element: <Properties /> },
+      {
+        path: "/properties",
+        element: (
+          <PrivateRoute>
+            <Properties />
+          </PrivateRoute>
+        ),
+      },
       { path: "/contact", element: <Contact /> },
-      { path: "/chosePurpose", element: <ChosePurpose /> },
+      {
+        path: "/chosePurpose",
+        element: (
+          <PrivateRoute>
+            <ChosePurpose />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/property/:id",
+        element: (
+          <PrivateRoute>
+            <PropertyDetail />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_URL}/property/${params.id}`),
+      },
     ],
   },
   {
@@ -106,7 +134,7 @@ const router = createBrowserRouter([
           </AgentRoute>
         ),
         loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_URL}/property/${params.id}`),
+          fetch(`${import.meta.env.VITE_URL}/propertyEdit/${params.id}`),
       },
       {
         path: "/dashboard/agent/myProperties",
@@ -138,6 +166,30 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AdminHome />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/manageProperties",
+        element: (
+          <AdminRoute>
+            <ManageProperties />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/manageUsers",
+        element: (
+          <AdminRoute>
+            <ManageUsers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/manageReviews",
+        element: (
+          <AdminRoute>
+            <ManageReviews />
           </AdminRoute>
         ),
       },

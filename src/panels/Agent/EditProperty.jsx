@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PageTitle from "../../layouts/components/PageTitle";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -6,14 +6,16 @@ import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 import Swal from "sweetalert2";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const EditProperty = () => {
-  const { _id, image, title, minPrice, maxPrice, area, location } =
-    useLoaderData();
+  const property = useLoaderData();
+  const navigate = useNavigate();
+  const { _id, image, title, minPrice, maxPrice, area, location } = property;
+
   const { user, dark } = useAuth();
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
@@ -100,6 +102,12 @@ const EditProperty = () => {
       }
     }
   };
+  useEffect(() => {
+    // console.log(property.message != null);
+    if (property.message != null) {
+      navigate("/dashboard/agent/myProperties");
+    }
+  }, []);
   const fontColor = dark ? "white" : "black";
   return (
     <>

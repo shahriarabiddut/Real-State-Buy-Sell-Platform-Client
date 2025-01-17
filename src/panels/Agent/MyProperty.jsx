@@ -9,10 +9,8 @@ import Pagination from "../../components/Pagination";
 import Loading from "../../components/Loading";
 
 const MyProperty = () => {
-  const { dark } = useAuth();
+  const { user, dark } = useAuth();
   const axiosSecure = useAxiosSecure();
-
-  // Destructure the useProperty hook properly
   const {
     properties,
     currentPage,
@@ -22,11 +20,10 @@ const MyProperty = () => {
     isFetching,
     pages,
     refetch,
-  } = useProperty();
+  } = useProperty({ admin: false, home: false });
 
   const fontColor = dark ? "white" : "black";
 
-  // Delete Property Function
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -61,8 +58,6 @@ const MyProperty = () => {
     });
   };
 
-  // Pagination Logic
-
   return (
     <section className="w-11/12 mx-auto py-10">
       <PageTitle
@@ -77,7 +72,7 @@ const MyProperty = () => {
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-2">
               {properties.length === 0 ? (
                 <p>No properties found.</p>
               ) : (

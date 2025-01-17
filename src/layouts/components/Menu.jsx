@@ -4,12 +4,14 @@ import {
   MdAddHome,
   MdDashboard,
   MdHomeWork,
+  MdManageAccounts,
   MdOutlineRealEstateAgent,
   MdOutlineSupportAgent,
 } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import useRole from "../../hooks/useRole";
-import { TbHomeQuestion } from "react-icons/tb";
+import { TbHomeQuestion, TbHomeShield } from "react-icons/tb";
+import { VscPreview } from "react-icons/vsc";
 
 const Menu = ({ dark }) => {
   const menuCss = ({ isActive }) =>
@@ -80,12 +82,32 @@ const Menu = ({ dark }) => {
           </>
         )}
         {isRole === "admin" && (
-          <li className="relative px-6 py-3">
-            <NavLink to={`/dashboard/adminHome`} className={menuCss}>
-              <MdDashboard className="text-xl" />
-              <span className="ml-4">Dashboard</span>
-            </NavLink>
-          </li>
+          <>
+            <li className="relative px-6 py-3">
+              <NavLink to={`/dashboard/adminHome`} className={menuCss}>
+                <MdDashboard className="text-xl" />
+                <span className="ml-4">Dashboard</span>
+              </NavLink>
+            </li>
+            <li className="relative px-6 py-3">
+              <NavLink to={`/dashboard/manageProperties`} className={menuCss}>
+                <TbHomeShield className="text-xl" />
+                <span className="ml-4">Manage Properties</span>
+              </NavLink>
+            </li>
+            <li className="relative px-6 py-3">
+              <NavLink to={`/dashboard/manageUsers`} className={menuCss}>
+                <MdManageAccounts className="text-xl" />
+                <span className="ml-4">Manage Users</span>
+              </NavLink>
+            </li>
+            <li className="relative px-6 py-3">
+              <NavLink to={`/dashboard/manageReviews`} className={menuCss}>
+                <VscPreview className="text-xl" />
+                <span className="ml-4">Manage Reviews</span>
+              </NavLink>
+            </li>
+          </>
         )}
         <div className={`divider ${dark ? "" : ""}`}></div>
         <li className="relative px-6 py-3">
