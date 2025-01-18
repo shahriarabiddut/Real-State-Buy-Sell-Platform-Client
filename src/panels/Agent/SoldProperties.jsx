@@ -20,7 +20,7 @@ const SoldProperties = () => {
     itemsPerPage,
     setItemsPerPage,
     pages,
-  } = useDeal({ type: "agent" });
+  } = useDeal({ type: "agent", sold: true });
   const fontColor = dark ? "white" : "black";
   const fontColorTh = dark ? "text-gray-200" : "text-gray-900";
   const handleAccept = async (_id) => {
@@ -63,8 +63,8 @@ const SoldProperties = () => {
   return (
     <section className="w-11/12 mx-auto py-10">
       <PageTitle
-        title={"Property Bought"}
-        subTitle={"Property Offered and Bought!"}
+        title={"Sold Properties"}
+        subTitle={"Property Sold History!"}
         color={fontColor}
       />
       <div className="flex justify-center flex-col">
@@ -80,7 +80,7 @@ const SoldProperties = () => {
               }`}
             >
               {deals.length === 0 ? (
-                <p>No Propery in deals.</p>
+                <p>No Property Sold .</p>
               ) : (
                 <div className="overflow-x-auto">
                   <table className="table">
@@ -89,8 +89,8 @@ const SoldProperties = () => {
                       <tr>
                         <th className={fontColorTh}>Propety</th>
                         <th className={fontColorTh}>Buyer</th>
-                        <th className={fontColorTh}>Offer Price</th>
-                        <th className={fontColorTh}>Status</th>
+                        <th className={fontColorTh}>Sold Price</th>
+                        <th className={fontColorTh}>TranasactionId</th>
                         <th></th>
                       </tr>
                     </thead>
@@ -112,11 +112,6 @@ const SoldProperties = () => {
                             <span className={" p-1 m-1 " + fontColorTh}>
                               {deal.propertyDetails.location}
                             </span>
-                            <br />
-                            <span className={" p-1 m-1 " + fontColorTh}>
-                              Price : {deal.propertyDetails.minPrice} -{" "}
-                              {deal.propertyDetails.maxPrice}
-                            </span>
                           </td>
                           <td>
                             <div className="flex items-center gap-3">
@@ -135,34 +130,7 @@ const SoldProperties = () => {
                             </div>
                           </td>
                           <td className={fontColorTh}>৳ {deal.offerPrice}</td>
-                          <td className="flex gap-1">
-                            {deal.status == "pending" && (
-                              <>
-                                <button
-                                  className="btn btn-sm btn-success flex text-white items-center"
-                                  onClick={() => handleAccept(deal._id)}
-                                >
-                                  <FaCheck />
-                                  Accept
-                                </button>
-                                <button
-                                  className="btn btn-sm btn-error flex text-white items-center"
-                                  onClick={() => handleReject(deal._id)}
-                                >
-                                  <FaBan />
-                                  Reject
-                                </button>
-                              </>
-                            )}
-                            {deal.status == "accepted" && (
-                              <p className="text-green-800 font-bold">
-                                Accepted
-                              </p>
-                            )}
-                            {deal.status == "rejected" && (
-                              <p className="text-red-800 font-bold">Rejected</p>
-                            )}
-                          </td>
+                          <td className="flex gap-1">{deal?.transactionId}</td>
                         </tr>
                       ))}
                     </tbody>

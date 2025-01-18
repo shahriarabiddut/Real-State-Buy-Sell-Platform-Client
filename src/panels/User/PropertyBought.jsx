@@ -20,7 +20,7 @@ const PropertyBought = () => {
     itemsPerPage,
     setItemsPerPage,
     pages,
-  } = useDeal({ type: "user" });
+  } = useDeal({ type: "user", sold: false });
   const fontColor = dark ? "white" : "black";
 
   return (
@@ -39,7 +39,7 @@ const PropertyBought = () => {
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-2">
               {deals.length === 0 ? (
-                <p>No Propery in deals.</p>
+                <p>No Property in deals.</p>
               ) : (
                 deals.map((deal, index) => (
                   <PropertyCard

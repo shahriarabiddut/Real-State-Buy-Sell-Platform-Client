@@ -72,7 +72,7 @@ const WishList = () => {
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-2">
               {wishlist.length === 0 ? (
-                <p>No Propery in Wishlist.</p>
+                <p>No Property in Wishlist.</p>
               ) : (
                 wishlist.map((wish, index) => (
                   <PropertyCard

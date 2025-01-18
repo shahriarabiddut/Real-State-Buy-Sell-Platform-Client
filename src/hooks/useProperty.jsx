@@ -13,7 +13,7 @@ const useProperty = ({ admin, home }) => {
   const {
     refetch,
     data: properties = { data: [], count: 0 },
-    isFetching,
+    isFetched,
   } = useQuery({
     queryKey: ["properties", userEmail, currentPage, itemsPerPage],
     queryFn: async () => {
@@ -36,7 +36,7 @@ const useProperty = ({ admin, home }) => {
     itemsPerPage,
     setItemsPerPage,
     pages,
-    isFetching,
+    isFetched,
   };
 };
 

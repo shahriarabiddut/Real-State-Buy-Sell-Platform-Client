@@ -140,7 +140,7 @@ const router = createBrowserRouter([
           </UserRoute>
         ),
         loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_URL}/property/${params.id}`),
+          fetch(`${import.meta.env.VITE_URL}/deal/${params.id}`),
       },
       {
         path: "/dashboard/propertyBought",

@@ -18,9 +18,7 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
     maxPrice,
     area,
     location,
-    agent,
     agentName,
-    wishlistId,
   } = property;
   const tdCss = `font-medium border border-gray-300 px-2 py-1 ${
     dark ? "text-gray-200" : "text-gray-500"
@@ -43,7 +41,11 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
         />
         <div
           className={`badge ${
-            status == "pending" ? "badge-error" : "badge-primary"
+            status == "pending"
+              ? "badge-info"
+              : status == "rejected"
+              ? "badge-error"
+              : "badge-primary"
           } absolute top-2 left-2 uppercase text-white font-semibold`}
         >
           {status}
@@ -88,7 +90,7 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
             <div className="mt-4 flex justify-between items-center">
               <div className="flex items-center">
                 <img
-                  src={agent?.photo}
+                  src={property?.agent?.photo}
                   alt={agentName}
                   className="w-10 h-10 rounded-full object-cover mr-2"
                 />
@@ -124,7 +126,7 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
             <div className="mt-4 flex justify-between items-center">
               <div className="flex items-center">
                 <img
-                  src={agent?.photo}
+                  src={property?.agent?.photo}
                   alt={agentName}
                   className="w-10 h-10 rounded-full object-cover mr-2"
                 />
@@ -145,7 +147,7 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
             <div className="mt-4 flex justify-between items-center">
               <div className="flex items-center">
                 <img
-                  src={agent?.photo}
+                  src={property?.agent?.photo}
                   alt={agentName}
                   className="w-10 h-10 rounded-full object-cover mr-2"
                 />
@@ -166,7 +168,7 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
               <button
                 className="inline-flex btn btn-sm btn-error text-white"
                 onClick={() => {
-                  handleDelete(wishlistId);
+                  handleDelete(property?.wishlistId);
                 }}
               >
                 <FaTrash />
@@ -217,10 +219,10 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
                     </td>
                   </tr>
                 )}
-                {status === "bought" && (
+                {property?.trID !== null && (
                   <tr className="border border-gray-300 p-2">
                     <td className={tdCss}>TransactionId</td>
-                    <td className={tdpCss + " uppercase"}>{property?.trID}</td>
+                    <td className={tdpCss + " uppercase"}>{property?.trId}</td>
                   </tr>
                 )}
               </tbody>

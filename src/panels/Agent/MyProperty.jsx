@@ -17,7 +17,7 @@ const MyProperty = () => {
     setCurrentPage,
     itemsPerPage,
     setItemsPerPage,
-    isFetching,
+    isFetched,
     pages,
     refetch,
   } = useProperty({ admin: false, home: false });
@@ -66,7 +66,7 @@ const MyProperty = () => {
         color={fontColor}
       />
       <div className="flex justify-center flex-col">
-        {isFetching ? (
+        {!isFetched ? (
           <div className="flex justify-center items-center">
             <Loading />
           </div>

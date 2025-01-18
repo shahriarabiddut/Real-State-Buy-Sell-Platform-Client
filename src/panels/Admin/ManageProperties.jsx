@@ -17,7 +17,7 @@ const ManageProperties = () => {
     setCurrentPage,
     itemsPerPage,
     setItemsPerPage,
-    isFetching,
+    isFetched,
     pages,
     refetch,
   } = useProperty({ admin: true, home: false });
@@ -73,7 +73,7 @@ const ManageProperties = () => {
             dark ? "bg-gray-800" : "bg-white"
           }`}
         >
-          {isFetching ? (
+          {!isFetched ? (
             <div className="flex justify-center items-center">
               <Loading />
             </div>

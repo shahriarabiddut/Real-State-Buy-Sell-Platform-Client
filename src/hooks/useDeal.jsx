@@ -3,11 +3,12 @@ import useAxiosSecure from "./useAxiosSecure";
 import useAuth from "./useAuth";
 import { useState } from "react";
 
-const useDeal = ({ type }) => {
+const useDeal = ({ type, sold }) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(8);
+  const flagData = sold ? "sold" : "";
   const {
     refetch,
     data: deals = { data: [], count: 0 },
@@ -16,7 +17,7 @@ const useDeal = ({ type }) => {
     queryKey: ["deals", user?.email, currentPage, itemsPerPage],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/deals?email=${user.email}&type=${type}`
+        `/deals?email=${user.email}&type=${type}&flag=${flagData}`
       );
       return res.data;
     },
