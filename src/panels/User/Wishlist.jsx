@@ -7,21 +7,21 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useProperty from "../../hooks/useProperty";
 import PageTitle from "../../layouts/components/PageTitle";
+import useWishList from "../../hooks/useWishList";
 
-const MyProperty = () => {
+const WishList = () => {
   const { user, dark } = useAuth();
   const axiosSecure = useAxiosSecure();
   const {
-    properties,
+    wishlist,
+    refetch,
+    isFetched,
     currentPage,
     setCurrentPage,
     itemsPerPage,
     setItemsPerPage,
-    isFetching,
     pages,
-    refetch,
-  } = useProperty({ admin: false, home: false });
-
+  } = useWishList({ dashboard: true });
   const fontColor = dark ? "white" : "black";
 
   const handleDelete = (id) => {
@@ -32,17 +32,17 @@ const MyProperty = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Yes, Remove it!",
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure
-          .delete(`/property/${id}`)
+          .delete(`/wishlist/${id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
               refetch(); // Refetch data after deletion
               Swal.fire({
-                title: "Deleted!",
-                text: "Your Property has been deleted.",
+                title: "Removed!",
+                text: "Property has been Removed from Wishlist.",
                 icon: "success",
               });
             }
@@ -57,39 +57,38 @@ const MyProperty = () => {
       }
     });
   };
-
   return (
     <section className="w-11/12 mx-auto py-10">
       <PageTitle
-        title={"My Property"}
-        subTitle={"Property Listed By You!"}
+        title={"My WishList"}
+        subTitle={"WishList Listed By You!"}
         color={fontColor}
       />
       <div className="flex justify-center flex-col">
-        {isFetching ? (
+        {!isFetched ? (
           <div className="flex justify-center items-center">
             <Loading />
           </div>
         ) : (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-2">
-              {properties.length === 0 ? (
-                <p>No properties found.</p>
+              {wishlist.length === 0 ? (
+                <p>No Propery in Wishlist.</p>
               ) : (
-                properties.map((property, index) => (
+                wishlist.map((wish, index) => (
                   <PropertyCard
                     key={index}
-                    property={property}
+                    property={wish.propertyDetails}
                     dark={dark}
                     handleDelete={handleDelete}
-                    userType={"agent"}
+                    userType={"wish"}
                   />
                 ))
               )}
             </div>
 
             {/* Pagination */}
-            {properties.length > 0 && (
+            {wishlist.length > 0 && (
               <Pagination
                 setItemsPerPage={setItemsPerPage}
                 setCurrentPage={setCurrentPage}
@@ -105,4 +104,4 @@ const MyProperty = () => {
   );
 };
 
-export default MyProperty;
+export default WishList;

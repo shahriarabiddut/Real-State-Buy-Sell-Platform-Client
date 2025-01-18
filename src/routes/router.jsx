@@ -31,6 +31,9 @@ import PropertyDetail from "../pages/PropertyDetail";
 import ManageProperties from "../panels/Admin/ManageProperties";
 import ManageUsers from "../panels/Admin/ManageUsers";
 import ManageReviews from "../panels/Admin/ManageReviews";
+import Wishlist from "../panels/User/Wishlist";
+import PropertyBought from "../panels/User/PropertyBought";
+import MyReviews from "../panels/User/MyReviews";
 
 const urlHome = import.meta.env.VITE_URL;
 const router = createBrowserRouter([
@@ -102,10 +105,34 @@ const router = createBrowserRouter([
       },
       // User Routes
       {
-        path: "/dashboard",
+        path: "/dashboard/userHome",
         element: (
           <UserRoute>
             <UserHome />
+          </UserRoute>
+        ),
+      },
+      {
+        path: "/dashboard/wishlist",
+        element: (
+          <UserRoute>
+            <Wishlist />
+          </UserRoute>
+        ),
+      },
+      {
+        path: "/dashboard/propertyBought",
+        element: (
+          <UserRoute>
+            <PropertyBought />
+          </UserRoute>
+        ),
+      },
+      {
+        path: "/dashboard/myReviews",
+        element: (
+          <UserRoute>
+            <MyReviews />
           </UserRoute>
         ),
       },

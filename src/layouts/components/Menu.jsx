@@ -1,10 +1,17 @@
 import React from "react";
-import { FaFileInvoiceDollar, FaHome, FaMagento, FaUser } from "react-icons/fa";
+import {
+  FaFileInvoiceDollar,
+  FaHome,
+  FaListAlt,
+  FaMagento,
+  FaUser,
+} from "react-icons/fa";
 import {
   MdAddHome,
   MdDashboard,
   MdHomeWork,
   MdManageAccounts,
+  MdOutlineRateReview,
   MdOutlineRealEstateAgent,
   MdOutlineSupportAgent,
 } from "react-icons/md";
@@ -34,12 +41,32 @@ const Menu = ({ dark }) => {
       </NavLink>
       <ul className="mt-6">
         {isRole === "user" && (
-          <li className="relative px-6 py-3">
-            <NavLink to={`/dashboard`} className={menuCss}>
-              <MdDashboard className="text-xl" />
-              <span className="ml-4">Dashboard</span>
-            </NavLink>
-          </li>
+          <>
+            <li className="relative px-6 py-3">
+              <NavLink to={`/dashboard/userHome`} className={menuCss}>
+                <MdDashboard className="text-xl" />
+                <span className="ml-4">Dashboard</span>
+              </NavLink>
+            </li>
+            <li className="relative px-6 py-3">
+              <NavLink to={`/dashboard/wishlist`} className={menuCss}>
+                <FaListAlt className="text-xl" />
+                <span className="ml-4">Wishlist</span>
+              </NavLink>
+            </li>
+            <li className="relative px-6 py-3">
+              <NavLink to={`/dashboard/propertyBought`} className={menuCss}>
+                <MdHomeWork className="text-xl" />
+                <span className="ml-4">Property Bought</span>
+              </NavLink>
+            </li>
+            <li className="relative px-6 py-3">
+              <NavLink to={`/dashboard/myReviews`} className={menuCss}>
+                <MdOutlineRateReview className="text-xl" />
+                <span className="ml-4">My Reviews</span>
+              </NavLink>
+            </li>
+          </>
         )}
         {isRole === "agent" && (
           <>

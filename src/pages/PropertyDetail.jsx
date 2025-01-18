@@ -1,9 +1,19 @@
-import React from "react";
-import BreadcumbBanner from "../components/BreadcumbBanner";
-import { useLoaderData } from "react-router-dom";
+import React, { useState } from "react";
+import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+import BreadcumbBanner from "../components/BreadcumbBanner";
+import useAuth from "../hooks/useAuth";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import useRole from "../hooks/useRole";
+import useWishList from "../hooks/useWishList";
 
 const PropertyDetail = () => {
+  const [isRole] = useRole();
+  const { user, sweetAlert, showToast } = useAuth();
+  const navigate = useNavigate();
+  const locationR = useLocation();
+  const axiosSecure = useAxiosSecure();
+  const { wishlist, refetch, isFetched } = useWishList({ dashboard: false });
   const {
     _id,
     image,
@@ -14,7 +24,39 @@ const PropertyDetail = () => {
     area,
     location,
     agentName,
+    agentEmail,
   } = useLoaderData();
+  const handleAddWishlist = (id) => {
+    if (user && user.email) {
+      // Todo: Send Data
+      // console.log(food);
+      const wishItem = {
+        propertyId: id,
+        email: user.email,
+        agent: agentEmail,
+      };
+      // console.log(wishItem);
+      axiosSecure.post("/wishlist", wishItem).then((res) => {
+        console.log(res);
+        if (res.data.insertedId) {
+          showToast("Added To Wishlist", "success");
+          // Refetch the cart items count
+          refetch();
+        }
+      });
+    } else {
+      sweetAlert(
+        "You Are Not Logged In!",
+        "Please Login to Add to Cart",
+        "question",
+        "Login"
+      ).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/auth/login", { state: { from: locationR } });
+        }
+      });
+    }
+  };
   return (
     <>
       <BreadcumbBanner title={"Property Details"} />
@@ -62,11 +104,21 @@ const PropertyDetail = () => {
                     Agent : {agentName}{" "}
                   </h2>
                 </div>
-                <div className=" rounded-lg mt-4 space-y-2">
-                  <button className="btn btn-block btn-accent text-white text-xl">
-                    Add To Wishlist
-                  </button>
-                </div>
+                {isRole === "user" &&
+                  (!isFetched ? (
+                    <>Loading...</>
+                  ) : (
+                    !wishlist.some((w) => w.propertyId === _id) && (
+                      <div className="rounded-lg mt-4 space-y-2">
+                        <button
+                          className="btn btn-block btn-accent text-white text-xl"
+                          onClick={() => handleAddWishlist(_id)}
+                        >
+                          Add To Wishlist
+                        </button>
+                      </div>
+                    )
+                  ))}
               </TabPanel>
               <TabPanel>
                 <div className="p-6 bg-gray-100 rounded-lg mt-4 space-y-2">

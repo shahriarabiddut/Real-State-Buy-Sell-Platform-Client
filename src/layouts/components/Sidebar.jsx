@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { CgClose } from "react-icons/cg";
 import {
   FaBars,
   FaBell,
@@ -9,10 +10,9 @@ import {
   FaUser,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import Menu from "./Menu";
-import { CgClose } from "react-icons/cg";
-import useAuth from "../../hooks/useAuth";
 import profileError from "../../assets/profileError.png";
+import useAuth from "../../hooks/useAuth";
+import Menu from "./Menu";
 
 const Sidebar = () => {
   const { user, logOut, showToast, dark, setDark } = useAuth();
@@ -211,6 +211,19 @@ const Sidebar = () => {
                       >
                         <FaUser />
                         <span>Profile</span>
+                      </Link>
+                    </li>
+                    <li className="flex">
+                      <Link
+                        className={`inline-flex gap-3 items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md ${
+                          dark
+                            ? "hover:bg-gray-800 hover:text-gray-200"
+                            : "hover:bg-gray-100 hover:text-gray-800"
+                        }`}
+                        to={`/dashboard/profile/update`}
+                      >
+                        <FaCog />
+                        <span>Edit Profile</span>
                       </Link>
                     </li>
                     <li className="flex">

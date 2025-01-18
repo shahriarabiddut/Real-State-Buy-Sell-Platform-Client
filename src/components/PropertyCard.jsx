@@ -2,6 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import errorProperty from "../assets/errorProperty.jpg";
 import { FaEye, FaPen, FaTrash } from "react-icons/fa";
+import { RiSpeakAiLine } from "react-icons/ri";
 
 const PropertyCard = ({ property, dark, handleDelete, userType }) => {
   const handleImageError = (e) => {
@@ -116,6 +117,44 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
                   <FaEye /> View Details
                 </button>
               </NavLink>
+            </div>
+          </>
+        )}
+        {userType === "wish" && (
+          <>
+            <div className="mt-4 flex justify-between items-center">
+              <div className="flex items-center">
+                <img
+                  src={agent?.photo}
+                  alt={agentName}
+                  className="w-10 h-10 rounded-full object-cover mr-2"
+                />
+                <p className="text-lg font-medium">{agentName}</p>
+              </div>
+            </div>
+            <div className="mt-4 flex justify-between items-center">
+              {/* <NavLink to={`/property/${_id}`}>
+                <button className="inline-flex btn btn-sm btn-success text-white">
+                  <FaEye />
+                </button>
+              </NavLink> */}
+
+              <button
+                className="inline-flex btn btn-sm btn-info text-white"
+                onClick={() => {
+                  handleDelete(_id);
+                }}
+              >
+                <RiSpeakAiLine /> Make an offer
+              </button>
+              <button
+                className="inline-flex btn btn-sm btn-error text-white"
+                onClick={() => {
+                  handleDelete(_id);
+                }}
+              >
+                <FaTrash />
+              </button>
             </div>
           </>
         )}

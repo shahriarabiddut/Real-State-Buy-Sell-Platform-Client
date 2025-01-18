@@ -124,7 +124,7 @@ const Navbar = () => {
                       </Link>
                     )}
                     {(isRole === "user" || isRole === "notMentioned") && (
-                      <Link className={cssUser} to={`/dashboard`}>
+                      <Link className={cssUser} to={`/dashboard/userHome`}>
                         <MdDashboard />
                         <span>Dashboard</span>
                       </Link>
