@@ -42,25 +42,25 @@ const Menu = ({ dark }) => {
       <ul className="mt-6">
         {isRole === "user" && (
           <>
-            <li className="relative px-6 py-3">
+            <li className="relative px-6 py-1">
               <NavLink to={`/dashboard/userHome`} className={menuCss}>
                 <MdDashboard className="text-xl" />
                 <span className="ml-4">Dashboard</span>
               </NavLink>
             </li>
-            <li className="relative px-6 py-3">
+            <li className="relative px-6 py-1">
               <NavLink to={`/dashboard/wishlist`} className={menuCss}>
                 <FaListAlt className="text-xl" />
                 <span className="ml-4">Wishlist</span>
               </NavLink>
             </li>
-            <li className="relative px-6 py-3">
+            <li className="relative px-6 py-1">
               <NavLink to={`/dashboard/propertyBought`} className={menuCss}>
                 <MdHomeWork className="text-xl" />
                 <span className="ml-4">Property Bought</span>
               </NavLink>
             </li>
-            <li className="relative px-6 py-3">
+            <li className="relative px-6 py-1">
               <NavLink to={`/dashboard/myReviews`} className={menuCss}>
                 <MdOutlineRateReview className="text-xl" />
                 <span className="ml-4">My Reviews</span>
@@ -70,25 +70,25 @@ const Menu = ({ dark }) => {
         )}
         {isRole === "agent" && (
           <>
-            <li className="relative px-6 py-3">
+            <li className="relative px-6 py-1">
               <NavLink to={`/dashboard/agentHome`} className={menuCss}>
                 <MdDashboard className="text-xl" />
                 <span className="ml-4">Dashboard</span>
               </NavLink>
             </li>
-            <li className="relative px-6 py-3">
+            <li className="relative px-6 py-1">
               <NavLink to={`/dashboard/agent/addProperty`} className={menuCss}>
                 <MdAddHome className="text-xl" />
                 <span className="ml-4">Add Property</span>
               </NavLink>
             </li>
-            <li className="relative px-6 py-3">
+            <li className="relative px-6 py-1">
               <NavLink to={`/dashboard/agent/myProperties`} className={menuCss}>
                 <MdHomeWork className="text-xl" />
                 <span className="ml-4">My Added Properties</span>
               </NavLink>
             </li>
-            <li className="relative px-6 py-3">
+            <li className="relative px-6 py-1">
               <NavLink
                 to={`/dashboard/agent/soldProperties`}
                 className={menuCss}
@@ -97,7 +97,7 @@ const Menu = ({ dark }) => {
                 <span className="ml-4">My Sold Properties</span>
               </NavLink>
             </li>
-            <li className="relative px-6 py-3">
+            <li className="relative px-6 py-1">
               <NavLink
                 to={`/dashboard/agent/requestedProperties`}
                 className={menuCss}
@@ -110,25 +110,25 @@ const Menu = ({ dark }) => {
         )}
         {isRole === "admin" && (
           <>
-            <li className="relative px-6 py-3">
+            <li className="relative px-6 py-1">
               <NavLink to={`/dashboard/adminHome`} className={menuCss}>
                 <MdDashboard className="text-xl" />
                 <span className="ml-4">Dashboard</span>
               </NavLink>
             </li>
-            <li className="relative px-6 py-3">
+            <li className="relative px-6 py-1">
               <NavLink to={`/dashboard/manageProperties`} className={menuCss}>
                 <TbHomeShield className="text-xl" />
                 <span className="ml-4">Manage Properties</span>
               </NavLink>
             </li>
-            <li className="relative px-6 py-3">
+            <li className="relative px-6 py-1">
               <NavLink to={`/dashboard/manageUsers`} className={menuCss}>
                 <MdManageAccounts className="text-xl" />
                 <span className="ml-4">Manage Users</span>
               </NavLink>
             </li>
-            <li className="relative px-6 py-3">
+            <li className="relative px-6 py-1">
               <NavLink to={`/dashboard/manageReviews`} className={menuCss}>
                 <VscPreview className="text-xl" />
                 <span className="ml-4">Manage Reviews</span>
@@ -137,31 +137,31 @@ const Menu = ({ dark }) => {
           </>
         )}
         <div className={`divider ${dark ? "" : ""}`}></div>
-        <li className="relative px-6 py-3">
+        <li className="relative px-6 py-1">
           <NavLink to={`/dashboard/profile`} className={menuCss}>
             <FaUser className="text-xl" />
             <span className="ml-4">Profile</span>
           </NavLink>
         </li>
-        <li className="relative px-6 py-3">
+        <li className="relative px-6 py-1">
           <NavLink to={`/`} className={menuCss}>
             <FaHome className="text-xl" />
             <span className="ml-4">Home</span>
           </NavLink>
         </li>
-        <li className="relative px-6 py-3">
+        <li className="relative px-6 py-1">
           <NavLink to={`/properties`} className={menuCss}>
             <MdOutlineRealEstateAgent className="text-xl" />
             <span className="ml-4">Properties</span>
           </NavLink>
         </li>
-        <li className="relative px-6 py-3">
+        <li className="relative px-6 py-1">
           <NavLink to={`/agents`} className={menuCss}>
             <FaMagento className="text-xl" />
             <span className="ml-4">Agents</span>
           </NavLink>
         </li>
-        <li className="relative px-6 py-3">
+        <li className="relative px-6 py-1">
           <NavLink to={`/contact`} className={menuCss}>
             <MdOutlineSupportAgent className="text-xl" />
             <span className="ml-4">Contact</span>

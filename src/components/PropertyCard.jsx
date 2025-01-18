@@ -20,7 +20,14 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
     location,
     agent,
     agentName,
+    wishlistId,
   } = property;
+  const tdCss = `font-medium border border-gray-300 px-2 py-1 ${
+    dark ? "text-gray-200" : "text-gray-500"
+  }`;
+  const tdpCss = `border border-gray-300 px-2 py-1 ${
+    dark ? "text-gray-200" : "text-gray-500"
+  }`;
   return (
     <div
       className={`card shadow-xl overflow-hidden rounded-lg ${
@@ -34,7 +41,11 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
           className="w-full h-48 object-cover"
           onError={handleImageError}
         />
-        <div className="badge badge-primary absolute top-2 left-2 uppercase">
+        <div
+          className={`badge ${
+            status == "pending" ? "badge-error" : "badge-primary"
+          } absolute top-2 left-2 uppercase text-white font-semibold`}
+        >
           {status}
         </div>
         <div className="absolute bottom-2 left-2 bg-white px-3 py-1 rounded-md shadow-md">
@@ -44,25 +55,34 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
         </div>
       </div>
       <div className="p-4 ">
-        <ul className="flex justify-between text-sm text-gray-600 mb-4">
-          <li className={`${dark ? "text-gray-200" : "text-gray-500"}`}>
-            {area} sqft
-          </li>
-        </ul>
-        <div className="min-h-18">
-          <Link to={`/property/${_id}`}>
-            <h3
-              className={`font-bold text-lg mb-1 hover:text-blue-500  ${
-                dark ? "text-gray-200" : "text-gray-900"
-              }`}
-            >
-              {title}
-            </h3>
-          </Link>
-          <p className={`text-sm ${dark ? "text-gray-200" : "text-gray-500"}`}>
-            {location}
-          </p>
-        </div>
+        {userType != "bought" && (
+          <>
+            <ul className="flex justify-between text-sm text-gray-600 mb-4">
+              <li className={`${dark ? "text-gray-200" : "text-gray-500"}`}>
+                {area} sqft
+              </li>
+            </ul>
+
+            <div className="min-h-18">
+              <Link to={`/property/${_id}`}>
+                <h3
+                  className={`font-bold text-lg mb-1 hover:text-blue-500  ${
+                    dark ? "text-gray-200" : "text-gray-900"
+                  }`}
+                >
+                  {title}
+                </h3>
+              </Link>
+              <p
+                className={`text-sm ${
+                  dark ? "text-gray-200" : "text-gray-500"
+                }`}
+              >
+                {location}
+              </p>
+            </div>
+          </>
+        )}
         {userType === "agent" && (
           <>
             <div className="mt-4 flex justify-between items-center">
@@ -138,24 +158,73 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
                   <FaEye />
                 </button>
               </NavLink> */}
-
-              <button
-                className="inline-flex btn btn-sm btn-info text-white"
-                onClick={() => {
-                  handleDelete(_id);
-                }}
-              >
-                <RiSpeakAiLine /> Make an offer
-              </button>
+              <NavLink to={`/dashboard/makeOffer/${_id}`}>
+                <button className="inline-flex btn btn-sm btn-info text-white">
+                  <RiSpeakAiLine /> Make an offer
+                </button>
+              </NavLink>
               <button
                 className="inline-flex btn btn-sm btn-error text-white"
                 onClick={() => {
-                  handleDelete(_id);
+                  handleDelete(wishlistId);
                 }}
               >
                 <FaTrash />
               </button>
             </div>
+          </>
+        )}
+        {userType === "bought" && (
+          <>
+            <table className="table-auto border-collapse border border-gray-300 w-full my-4">
+              <tbody>
+                <tr className="border border-gray-300">
+                  <td
+                    colSpan={2}
+                    className={tdpCss + " font-bold hover:text-blue-500"}
+                  >
+                    <Link to={`/property/${_id}`}>
+                      {title} ({area} sqft.)
+                    </Link>
+                  </td>
+                </tr>
+                <tr className="border border-gray-300">
+                  <td className={tdCss}>Agent</td>
+                  <td className={tdpCss}>{agentName}</td>
+                </tr>
+                <tr className="border border-gray-300">
+                  <td className={tdCss}>Offered Price</td>
+                  <td className={tdpCss}>{minPrice}</td>
+                </tr>
+                <tr className="border border-gray-300">
+                  <td className={tdCss}>Status</td>
+                  <td className={tdpCss + " uppercase"}>{status}</td>
+                </tr>
+                {status === "accepted" && (
+                  <tr className="border border-gray-300 p-2">
+                    <td
+                      colSpan={2}
+                      className={
+                        tdpCss + " font-bold hover:text-blue-500 text-center"
+                      }
+                    >
+                      <Link
+                        to={`/dashboard/payment/${property?.dealId}`}
+                        className="bg-firstBg text-white p-1 rounded-lg text-center"
+                      >
+                        Pay To Confirm
+                      </Link>
+                    </td>
+                  </tr>
+                )}
+                {status === "bought" && (
+                  <tr className="border border-gray-300 p-2">
+                    <td className={tdCss}>TransactionId</td>
+                    <td className={tdpCss + " uppercase"}>{property?.trID}</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </>
         )}
       </div>

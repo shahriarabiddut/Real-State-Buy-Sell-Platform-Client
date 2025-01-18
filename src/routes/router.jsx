@@ -34,6 +34,8 @@ import ManageReviews from "../panels/Admin/ManageReviews";
 import Wishlist from "../panels/User/Wishlist";
 import PropertyBought from "../panels/User/PropertyBought";
 import MyReviews from "../panels/User/MyReviews";
+import MakeOffer from "../panels/User/MakeOffer";
+import Payment from "../panels/User/Payment";
 
 const urlHome = import.meta.env.VITE_URL;
 const router = createBrowserRouter([
@@ -119,6 +121,26 @@ const router = createBrowserRouter([
             <Wishlist />
           </UserRoute>
         ),
+      },
+      {
+        path: "/dashboard/makeOffer/:id",
+        element: (
+          <UserRoute>
+            <MakeOffer />
+          </UserRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_URL}/property/${params.id}`),
+      },
+      {
+        path: "/dashboard/payment/:id",
+        element: (
+          <UserRoute>
+            <Payment />
+          </UserRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_URL}/property/${params.id}`),
       },
       {
         path: "/dashboard/propertyBought",

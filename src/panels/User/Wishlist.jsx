@@ -5,9 +5,8 @@ import Pagination from "../../components/Pagination";
 import PropertyCard from "../../components/PropertyCard";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import useProperty from "../../hooks/useProperty";
-import PageTitle from "../../layouts/components/PageTitle";
 import useWishList from "../../hooks/useWishList";
+import PageTitle from "../../layouts/components/PageTitle";
 
 const WishList = () => {
   const { user, dark } = useAuth();
@@ -61,7 +60,7 @@ const WishList = () => {
     <section className="w-11/12 mx-auto py-10">
       <PageTitle
         title={"My WishList"}
-        subTitle={"WishList Listed By You!"}
+        subTitle={"Property WishListed By You!"}
         color={fontColor}
       />
       <div className="flex justify-center flex-col">
