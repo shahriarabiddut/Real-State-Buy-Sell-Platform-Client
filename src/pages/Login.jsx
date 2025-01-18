@@ -9,6 +9,7 @@ import {
 import authImg from "../assets/login.gif";
 import SocialLogin from "../components/SocialLogin";
 import useAuth from "../hooks/useAuth";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const Login = () => {
   const captchaRef = useRef(null);
@@ -21,7 +22,18 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-
+  const axiosPublic = useAxiosPublic();
+  // SignInTime Update
+  const signInTimeUpdate = (user, email) => {
+    const lastSignInTime = user.metadata.lastSignInTime;
+    const signInInfo = { email, lastSignInTime };
+    //Update sign In Info
+    axiosPublic.patch(`/users`, signInInfo).then((response) => {
+      // console.log("User lastSignInTime Updated ", response);
+    });
+    //
+  };
+  //
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -32,7 +44,8 @@ const Login = () => {
       .then((userCredential) => {
         // showToast('Logged In','');
         const currentUser = userCredential.user;
-        console.log(currentUser);
+        // console.log(currentUser);
+        signInTimeUpdate(currentUser, currentUser.email);
         showToast("Logged in Successfully!", "info");
         // setUser(currentUser);
         navigate(from, { replace: true });
