@@ -19,8 +19,14 @@ const MyProperty = () => {
     setItemsPerPage,
     isFetched,
     pages,
+    count,
     refetch,
-  } = useProperty({ admin: false, home: false, advertise: false });
+  } = useProperty({
+    admin: false,
+    home: false,
+    advertise: false,
+    sort: "",
+  });
 
   const fontColor = dark ? "white" : "black";
 
@@ -73,7 +79,7 @@ const MyProperty = () => {
         ) : (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-2">
-              {properties.length === 0 ? (
+              {count === 0 ? (
                 <p>No properties found.</p>
               ) : (
                 properties.map((property, index) => (
@@ -89,7 +95,7 @@ const MyProperty = () => {
             </div>
 
             {/* Pagination */}
-            {properties.length > 0 && (
+            {count > 0 && (
               <Pagination
                 setItemsPerPage={setItemsPerPage}
                 setCurrentPage={setCurrentPage}

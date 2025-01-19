@@ -3,7 +3,9 @@ import useAxiosSecure from "./useAxiosSecure";
 import useAuth from "./useAuth";
 import { useState } from "react";
 
-const useProperty = ({ admin, home, advertise }) => {
+const useProperty = ({ admin, home, advertise, sort }) => {
+  // For Search
+  const [filters, setFilters] = useState("");
   // console.log(admin, home, advertise);
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
@@ -18,11 +20,12 @@ const useProperty = ({ admin, home, advertise }) => {
     data: properties = { data: [], count: 0 },
     isFetched,
   } = useQuery({
-    queryKey: ["properties", userEmail, currentPage, itemsPerPage],
+    queryKey: ["properties", userEmail, currentPage, itemsPerPage, filters],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/property?email=${userEmail}&page=${currentPage}&size=${itemsPerPage}&check=${check}&adv=${adv}`
+        `/property?email=${userEmail}&page=${currentPage}&size=${itemsPerPage}&check=${check}&adv=${adv}&${filters}`
       );
+      // console.log(filters);
       return res.data;
     },
     keepPreviousData: true,
@@ -33,6 +36,7 @@ const useProperty = ({ admin, home, advertise }) => {
 
   return {
     properties: properties?.result || [],
+    count: properties?.count || [],
     refetch,
     currentPage,
     setCurrentPage,
@@ -40,6 +44,8 @@ const useProperty = ({ admin, home, advertise }) => {
     setItemsPerPage,
     pages,
     isFetched,
+    filters,
+    setFilters,
   };
 };
 

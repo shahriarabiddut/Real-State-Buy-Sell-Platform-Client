@@ -1,7 +1,9 @@
 import React from "react";
 import { FaGreaterThan, FaLessThan, FaSearch } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
-const SearchLocation = () => {
+const SearchBar = () => {
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -16,7 +18,7 @@ const SearchLocation = () => {
       minsize: size,
     };
     const queryParams = new URLSearchParams(keywords).toString();
-    console.log(queryParams);
+    // console.log(queryParams);
     navigate(`/propertySearch?${queryParams}`);
   };
 
@@ -106,4 +108,4 @@ const SearchLocation = () => {
   );
 };
 
-export default SearchLocation;
+export default SearchBar;

@@ -5,7 +5,7 @@ import Home from "../pages/Home/Home";
 import AboutUs from "../pages/AboutUs";
 import Agents from "../pages/Agents";
 import Services from "../pages/Services";
-import Properties from "../pages/Properties";
+import Properties from "../pages/Properties/Properties";
 import Contact from "../pages/Contact";
 import ErrorPage from "../pages/ErrorPage";
 import Dashboard from "../layouts/Dashboard";
@@ -37,6 +37,7 @@ import MyReviews from "../panels/User/MyReviews";
 import MakeOffer from "../panels/User/MakeOffer";
 import Payment from "../panels/User/Payment";
 import ManageFeaturedProperties from "../panels/Admin/ManageFeaturedProperties";
+import PropertiesSearch from "../pages/Properties/PropertSearch";
 
 const urlHome = import.meta.env.VITE_URL;
 const router = createBrowserRouter([
@@ -54,6 +55,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Properties />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/propertySearch",
+        element: (
+          <PrivateRoute>
+            <PropertiesSearch />
           </PrivateRoute>
         ),
       },

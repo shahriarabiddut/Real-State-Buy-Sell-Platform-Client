@@ -1,17 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import errorProperty from "../assets/errorProperty.jpg";
-import fp1 from "../assets/fp1.jpg";
-import fp2 from "../assets/fp2.jpg";
-import fp3 from "../assets/fp3.jpg";
-import profileError from "../assets/profileError.png";
-import BreadcumbBanner from "../components/BreadcumbBanner";
-import SectionTitle from "../components/SectionTitle";
-import SearchBar from "../components/SearchBar";
-import Loading from "../components/Loading";
-import PropertyCard from "../components/PropertyCard";
-import useProperty from "../hooks/useProperty";
-import Pagination from "../components/Pagination";
+import BreadcumbBanner from "../../components/BreadcumbBanner";
+import Loading from "../../components/Loading";
+import Pagination from "../../components/Pagination";
+import PropertyCard from "../../components/PropertyCard";
+import SectionTitle from "../../components/SectionTitle";
+import useProperty from "../../hooks/useProperty";
+import SearchLocation from "./SearchLocation";
 
 const Properties = () => {
   const {
@@ -23,14 +17,22 @@ const Properties = () => {
     isFetched,
     pages,
     refetch,
-  } = useProperty({ admin: true, home: true, advertise: false });
+    count,
+    filters,
+    setFilters,
+  } = useProperty({
+    admin: true,
+    home: true,
+    advertise: false,
+    sort: "",
+  });
   const handleImageError = (e, imageError) => {
     e.target.src = imageError;
   };
   return (
     <>
       <BreadcumbBanner title={"Properties"} />
-      <SearchBar />
+      <SearchLocation filters={filters} setFilters={setFilters} />
       <section className="container mx-auto w-11/12 py-20 lg:-mt-24 lg:py-10 lg:mb-14">
         <SectionTitle
           title={" Properties"}
@@ -46,7 +48,7 @@ const Properties = () => {
           ) : (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-2">
-                {properties.length === 0 ? (
+                {count === 0 ? (
                   <p>No properties found.</p>
                 ) : (
                   properties.map((property, index) => (
@@ -61,7 +63,7 @@ const Properties = () => {
               </div>
 
               {/* Pagination */}
-              {properties.length > 0 && (
+              {count > 0 && (
                 <Pagination
                   setItemsPerPage={setItemsPerPage}
                   setCurrentPage={setCurrentPage}

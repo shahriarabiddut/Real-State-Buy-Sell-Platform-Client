@@ -19,8 +19,15 @@ const ManageProperties = () => {
     setItemsPerPage,
     isFetched,
     pages,
+    count,
     refetch,
-  } = useProperty({ admin: true, home: false, advertise: false });
+  } = useProperty({
+    admin: true,
+    home: false,
+    advertise: false,
+
+    sort: "",
+  });
   const fontColor = dark ? "white" : "black";
   const fontColorTh = dark ? "text-gray-200" : "text-gray-900";
   const handleVerify = async (_id) => {
@@ -77,7 +84,7 @@ const ManageProperties = () => {
             <div className="flex justify-center items-center">
               <Loading />
             </div>
-          ) : properties.length === 0 ? (
+          ) : count === 0 ? (
             <div className="flex justify-center items-center">
               <p>No properties available.</p>
             </div>
@@ -174,7 +181,7 @@ const ManageProperties = () => {
                   <tr>
                     <td colSpan={"6"}>
                       {/* Pagination */}
-                      {properties.length > 0 && (
+                      {count > 0 && (
                         <Pagination
                           setItemsPerPage={setItemsPerPage}
                           setCurrentPage={setCurrentPage}
