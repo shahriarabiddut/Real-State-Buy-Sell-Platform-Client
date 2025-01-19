@@ -6,52 +6,13 @@ import { Navigation, Pagination } from "swiper/modules";
 import profileError from "../assets/profileError.png";
 import { FaQuoteLeft } from "react-icons/fa";
 import SectionTitle from "./SectionTitle";
+import useReview from "../hooks/useReview";
 
-const reviews = [
-  {
-    text: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
-    image: profileError,
-    name: "Roger Scott",
-    position: "Marketing Manager",
-  },
-  {
-    text: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
-    image: profileError,
-    name: "Roger Scott",
-    position: "Marketing Manager",
-  },
-  {
-    text: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
-    image: profileError,
-    name: "Roger Scott",
-    position: "Marketing Manager",
-  },
-  {
-    text: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
-    image: profileError,
-    name: "Roger Scott",
-    position: "Marketing Manager",
-  },
-  {
-    text: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
-    image: profileError,
-    name: "Roger Scott",
-    position: "Marketing Manager",
-  },
-  {
-    text: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
-    image: profileError,
-    name: "Roger Scott",
-    position: "Marketing Manager",
-  },
-  {
-    text: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
-    image: profileError,
-    name: "Roger Scott",
-    position: "Marketing Manager",
-  },
-];
 const UserReviews = () => {
+  const { reviews, refetchReview, isFetchedReview, count } = useReview({
+    dashboard: "home",
+    propertyId: "",
+  });
   return (
     <section className="bg-gray-200 ">
       <div className="container mx-auto text-center py-20 w-11/12">
@@ -88,20 +49,28 @@ const UserReviews = () => {
         >
           {reviews.map((review, index) => (
             <SwiperSlide key={index} className="text-center">
-              <div className="bg-white shadow-lg rounded-lg p-6 max-w-md mx-auto mb-12">
-                <span className="text-4xl text-firstBg block mb-4">
-                  <FaQuoteLeft />
-                </span>
-                <p className="text-gray-700 mb-6 text-justify">{review.text}</p>
-                <div className="flex items-start justify-start">
+              <div className="bg-white shadow-lg rounded-lg p-6 max-w-md mx-auto mb-12 h-64 flex flex-col justify-between">
+                <div>
+                  <span className="text-4xl text-firstBg block mb-4">
+                    <FaQuoteLeft />
+                  </span>
+                  <p className="text-gray-700 mb-6 text-justify overflow-hidden line-clamp-3">
+                    {review.description}
+                  </p>
+                </div>
+                <div className="flex items-center justify-start mt-auto">
                   <div
                     className="w-16 h-16 bg-cover bg-center rounded-full"
-                    style={{ backgroundImage: `url(${review.image})` }}
+                    style={{
+                      backgroundImage: `url(${
+                        review.reviewer.photo || profileError
+                      })`,
+                    }}
                   ></div>
                   <div className="ml-4 text-left">
-                    <p className="font-semibold">{review.name}</p>
+                    <p className="font-semibold">{review.reviewerName}</p>
                     <span className="text-sm text-gray-500">
-                      {review.position}
+                      {review.createdAt}
                     </span>
                   </div>
                 </div>
