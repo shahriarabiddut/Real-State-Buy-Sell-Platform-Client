@@ -64,7 +64,7 @@ const Sidebar = () => {
   return (
     <>
       <header
-        className={`z-10 py-4  shadow-md ${dark ? "bg-gray-800" : "bg-white"} `}
+        className={` py-4  shadow-md ${dark ? "bg-gray-800" : "bg-white"} `}
       >
         <div
           className={`container flex items-center justify-between md:justify-end h-full px-6 mx-auto  ${

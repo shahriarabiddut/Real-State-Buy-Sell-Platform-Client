@@ -8,8 +8,9 @@ const useReview = ({ dashboard, propertyId }) => {
   const { user } = useAuth();
   const panel = dashboard ? "dashboard" : "";
   const userEmail = dashboard !== "user" ? "" : user.email;
+  const itemsPerPageDecide = dashboard !== "home" ? 12 : 6;
   const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(8);
+  const [itemsPerPage, setItemsPerPage] = useState(itemsPerPageDecide);
   const {
     refetch,
     data: review = { data: [], count: 0 },
@@ -18,7 +19,7 @@ const useReview = ({ dashboard, propertyId }) => {
     queryKey: ["review", user?.email, currentPage, itemsPerPage],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/review?email=${userEmail}&dashboard=${panel}&id=${propertyId}`
+        `/review?email=${userEmail}&dashboard=${panel}&id=${propertyId}&page=${currentPage}&size=${itemsPerPage}`
       );
       // console.log(res);
       return res.data;

@@ -19,6 +19,7 @@ import { NavLink } from "react-router-dom";
 import useRole from "../../hooks/useRole";
 import { TbHomeQuestion, TbHomeShield } from "react-icons/tb";
 import { VscPreview } from "react-icons/vsc";
+import { RiAdvertisementFill } from "react-icons/ri";
 
 const Menu = ({ dark }) => {
   const menuCss = ({ isActive }) =>
@@ -132,6 +133,12 @@ const Menu = ({ dark }) => {
               <NavLink to={`/dashboard/manageReviews`} className={menuCss}>
                 <VscPreview className="text-xl" />
                 <span className="ml-4">Manage Reviews</span>
+              </NavLink>
+            </li>
+            <li className="relative px-6 py-1">
+              <NavLink to={`/dashboard/manageFeatured`} className={menuCss}>
+                <RiAdvertisementFill className="text-xl" />
+                <span className="ml-4">Advertise property</span>
               </NavLink>
             </li>
           </>

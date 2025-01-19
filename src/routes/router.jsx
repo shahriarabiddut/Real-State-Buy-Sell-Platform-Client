@@ -36,6 +36,7 @@ import PropertyBought from "../panels/User/PropertyBought";
 import MyReviews from "../panels/User/MyReviews";
 import MakeOffer from "../panels/User/MakeOffer";
 import Payment from "../panels/User/Payment";
+import ManageFeaturedProperties from "../panels/Admin/ManageFeaturedProperties";
 
 const urlHome = import.meta.env.VITE_URL;
 const router = createBrowserRouter([
@@ -239,6 +240,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <ManageReviews />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/manageFeatured",
+        element: (
+          <AdminRoute>
+            <ManageFeaturedProperties />
           </AdminRoute>
         ),
       },

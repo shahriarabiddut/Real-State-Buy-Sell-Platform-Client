@@ -20,7 +20,7 @@ const MyProperty = () => {
     isFetched,
     pages,
     refetch,
-  } = useProperty({ admin: false, home: false });
+  } = useProperty({ admin: false, home: false, advertise: false });
 
   const fontColor = dark ? "white" : "black";
 

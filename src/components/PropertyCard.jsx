@@ -28,7 +28,7 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
   }`;
   return (
     <div
-      className={`card shadow-xl overflow-hidden rounded-lg ${
+      className={` card shadow-xl overflow-hidden rounded-lg ${
         dark ? "bg-gray-800" : "bg-base-100"
       }`}
     >
@@ -136,7 +136,7 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
             <div className="my-2 mx-auto w-full">
               <NavLink to={`/property/${_id}`}>
                 <button className="flex items-center btn btn-wide btn-success text-white ">
-                  <FaEye /> View Details
+                  View Details
                 </button>
               </NavLink>
             </div>

@@ -3,13 +3,16 @@ import useAxiosSecure from "./useAxiosSecure";
 import useAuth from "./useAuth";
 import { useState } from "react";
 
-const useProperty = ({ admin, home }) => {
+const useProperty = ({ admin, home, advertise }) => {
+  // console.log(admin, home, advertise);
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const userEmail = admin ? "" : user?.email;
   const check = home ? "verified" : "";
+  const adv = advertise ? "adv" : "";
+  const selecetitemsPerPage = advertise ? 4 : 12;
   const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(8);
+  const [itemsPerPage, setItemsPerPage] = useState(selecetitemsPerPage);
   const {
     refetch,
     data: properties = { data: [], count: 0 },
@@ -18,7 +21,7 @@ const useProperty = ({ admin, home }) => {
     queryKey: ["properties", userEmail, currentPage, itemsPerPage],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/property?email=${userEmail}&page=${currentPage}&size=${itemsPerPage}&check=${check}`
+        `/property?email=${userEmail}&page=${currentPage}&size=${itemsPerPage}&check=${check}&adv=${adv}`
       );
       return res.data;
     },

@@ -14,11 +14,15 @@ const Dashboard = () => {
       >
         {/* Desktop sidebar */}
         <aside
-          className={`z-20 hidden w-64 overflow-y-auto md:block flex-shrink-0 border-r-2 ${
+          className={`z-20 hidden w-64 overflow-y-auto md:block flex-shrink-0 border-r-2 relative ${
             dark ? "bg-gray-800" : "bg-white"
           }`}
         >
-          <div className={`py-4  ${dark ? "text-gray-800" : "text-gray-500"}`}>
+          <div
+            className={`py-4 fixed top-2  ${
+              dark ? "text-gray-800" : "text-gray-500"
+            }`}
+          >
             <Menu dark={dark} />
           </div>
         </aside>
@@ -26,7 +30,9 @@ const Dashboard = () => {
         {/* Main content */}
         <div className="flex flex-col flex-1 w-full">
           {/* Mobile Sidebar */}
-          <Sidebar />
+          <div className="fixed top-0 right-0 w-full z-10">
+            <Sidebar />
+          </div>
           {/* Content Section */}
           <main className="">
             <div className="container px-6 mx-auto">

@@ -9,7 +9,7 @@ const PageTitle = ({ title, subTitle, color = "black" }) => {
           {title} | {import.meta.env.VITE_NAME}
         </title>
       </Helmet>
-      <div className="text-center my-6">
+      <div className="text-center mt-10 mb-8">
         <span className="text-green-500 text-lg font-semibold font-playWrite py-5">
           --- {subTitle} ---
         </span>

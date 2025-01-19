@@ -23,7 +23,7 @@ const Properties = () => {
     isFetched,
     pages,
     refetch,
-  } = useProperty({ admin: true, home: true });
+  } = useProperty({ admin: true, home: true, advertise: false });
   const handleImageError = (e, imageError) => {
     e.target.src = imageError;
   };

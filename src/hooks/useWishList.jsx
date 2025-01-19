@@ -17,7 +17,7 @@ const useWishList = ({ dashboard }) => {
     queryKey: ["wishlist", user?.email, currentPage, itemsPerPage],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/wishlist?email=${user.email}&dashboard=${panel}`
+        `/wishlist?email=${user.email}&dashboard=${panel}&page=${currentPage}&size=${itemsPerPage}`
       );
       return res.data;
     },
