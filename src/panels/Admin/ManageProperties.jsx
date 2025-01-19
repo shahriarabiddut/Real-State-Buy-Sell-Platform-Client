@@ -25,8 +25,6 @@ const ManageProperties = () => {
     admin: true,
     home: false,
     advertise: false,
-
-    sort: "",
   });
   const fontColor = dark ? "white" : "black";
   const fontColorTh = dark ? "text-gray-200" : "text-gray-900";

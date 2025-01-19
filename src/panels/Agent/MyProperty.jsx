@@ -25,7 +25,6 @@ const MyProperty = () => {
     admin: false,
     home: false,
     advertise: false,
-    sort: "",
   });
 
   const fontColor = dark ? "white" : "black";

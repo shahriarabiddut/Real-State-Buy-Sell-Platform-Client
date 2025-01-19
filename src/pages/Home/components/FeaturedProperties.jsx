@@ -10,8 +10,6 @@ const FeaturedProperties = () => {
     admin: true,
     home: true,
     advertise: true,
-
-    sort: "",
   });
   const handleImageError = (e, imageError) => {
     e.target.src = imageError;

@@ -116,26 +116,37 @@ const SearchLocation = ({ filters, setFilters }) => {
               </form>
             </div>
           </div>
+          <div className="flex justify-center">
+            {newFilters !== "" && (
+              <>
+                <div className="py-2 w-full lg:w-10/12 p-6 bg-slate-300 lg:rounded-lg shadow-md">
+                  <p className="w-11/12 mx-auto font-semibold font-poppins">
+                    Filters :
+                    {newFilters?.location && (
+                      <>
+                        Location&nbsp;
+                        <span className="uppercase">
+                          {newFilters.location}
+                        </span>{" "}
+                        .
+                      </>
+                    )}
+                    {newFilters?.minsize && (
+                      <> Min Size {newFilters.minsize} sqft.</>
+                    )}
+                    {newFilters?.minPrice && (
+                      <> Min Price {newFilters.minPrice} .</>
+                    )}
+                    {newFilters?.maxPrice && (
+                      <> Max Price {newFilters.maxPrice} .</>
+                    )}
+                  </p>
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </section>
-      {newFilters !== "" && (
-        <>
-          <div className="py-2 bg-slate-300">
-            <p className="w-11/12 mx-auto font-semibold font-poppins">
-              Filters :
-              {newFilters?.location && (
-                <>
-                  Location
-                  <span className="uppercase">{newFilters.location}</span> .
-                </>
-              )}
-              {newFilters?.minsize && <> Min Size {newFilters.minsize} sqft.</>}
-              {newFilters?.minPrice && <> Min Price {newFilters.minPrice} .</>}
-              {newFilters?.maxPrice && <> Max Price {newFilters.maxPrice} .</>}
-            </p>
-          </div>
-        </>
-      )}
     </>
   );
 };

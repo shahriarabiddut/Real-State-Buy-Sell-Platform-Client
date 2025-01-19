@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { FaSackDollar } from "react-icons/fa6";
+import { MdSell } from "react-icons/md";
+import { Link } from "react-router-dom";
 import Loading from "../../components/Loading";
 import Pagination from "../../components/Pagination";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useDeal from "../../hooks/useDeal";
 import PageTitle from "../../layouts/components/PageTitle";
-import { Link } from "react-router-dom";
-import { FaBan, FaCheck } from "react-icons/fa";
 
 const SoldProperties = () => {
-  const { showToast, dark } = useAuth();
+  const { user, showToast, dark } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const [agentStats, setAgentStats] = useState([]);
   const {
     deals,
     refetch,
@@ -59,6 +61,12 @@ const SoldProperties = () => {
       showToast("Failed to verify Deal. Please try again.", "error");
     }
   };
+  useEffect(() => {
+    axiosSecure.get(`/dealStats/${user.email}`).then((res) => {
+      // console.log(res.data[0] == null);
+      setAgentStats(res.data[0]);
+    });
+  }, [deals]);
 
   return (
     <section className="w-11/12 mx-auto py-10">
@@ -67,6 +75,34 @@ const SoldProperties = () => {
         subTitle={"Property Sold History!"}
         color={fontColor}
       />
+      <div className="flex justify-between m-1">
+        <div className="flex items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800">
+          <div className="p-3 mr-4 bg-orange-100 rounded-full dark:bg-orange-500">
+            <MdSell />
+          </div>
+          <div>
+            <p className="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+              Total Sold
+            </p>
+            <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">
+              {agentStats != null ? agentStats?.totalDeals : 0}
+            </p>
+          </div>
+        </div>
+        <div className="flex items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800">
+          <div className="p-3 mr-4 bg-teal-100 rounded-full dark:bg-teal-500">
+            <FaSackDollar />
+          </div>
+          <div>
+            <p className="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+              Total Earning
+            </p>
+            <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">
+              {agentStats != null ? agentStats?.totalEarnings : 0}
+            </p>
+          </div>
+        </div>
+      </div>
       <div className="flex justify-center flex-col">
         {!isFetched ? (
           <div className="flex justify-center items-center">

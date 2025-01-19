@@ -7,6 +7,7 @@ import SectionTitle from "../../components/SectionTitle";
 import useProperty from "../../hooks/useProperty";
 import SearchLocation from "./SearchLocation";
 import { useLocation } from "react-router-dom";
+import { SiLevelsdotfyi } from "react-icons/si";
 
 const PropertiesSearch = () => {
   const { search } = useLocation();
@@ -30,11 +31,12 @@ const PropertiesSearch = () => {
     count,
     filters,
     setFilters,
+    sort,
+    setSort,
   } = useProperty({
     admin: true,
     home: true,
     advertise: false,
-    sort: "",
   });
   const handleImageError = (e, imageError) => {
     e.target.src = imageError;
@@ -54,6 +56,14 @@ const PropertiesSearch = () => {
         />
 
         <div className="flex justify-center flex-col">
+          <div className="flex flex-row items-center justify-end py-2">
+            <button
+              className={`btn btn-success text-white`}
+              onClick={() => setSort(1)}
+            >
+              Sort By Price <SiLevelsdotfyi />
+            </button>
+          </div>
           {!isFetched ? (
             <div className="flex justify-center items-center">
               <Loading />
