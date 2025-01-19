@@ -1,46 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import profileError from "../../../assets/profileError.png";
-import SectionTitle from "../../../components/SectionTitle";
 import Agent from "../../../components/Agent";
+import SectionTitle from "../../../components/SectionTitle";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const Agents = () => {
-  const agents = [
-    {
-      name: "Carlos Henderson",
-      image: profileError,
-      properties: "10",
-    },
-    {
-      name: "Mike Bochs",
-      image: profileError,
-      properties: "10",
-    },
-    {
-      name: "Jessica Moore",
-      image: profileError,
-      properties: "10",
-    },
-    {
-      name: "Sarah Geronimo",
-      image: profileError,
-      properties: "10",
-    },
-    {
-      name: "Sarah Geronimo",
-      image: profileError,
-      properties: "10",
-    },
-    {
-      name: "Sarah Geronimo",
-      image: profileError,
-      properties: "10",
-    },
-    {
-      name: "Sarah Geronimo",
-      image: profileError,
-      properties: "10",
-    },
-  ];
+  const [agents, setAgents] = useState([]);
+  const [count, setCount] = useState([]);
+  const axiosSecure = useAxiosSecure();
+  useEffect(() => {
+    axiosSecure.get(`/agents?page=0&size=4`).then((res) => {
+      console.log(res.data.result);
+      setAgents(res.data.result);
+      setCount(res.data.count);
+    });
+  }, []);
 
   return (
     <>
@@ -51,9 +25,15 @@ const Agents = () => {
           color={"black"}
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {agents.splice(0, 4).map((agent, index) => (
-            <Agent key={index} agent={agent} />
-          ))}
+          {count > 0 ? (
+            <>
+              {agents.map((agent, index) => (
+                <Agent key={index} agent={agent} />
+              ))}
+            </>
+          ) : (
+            <>No Agents Found!</>
+          )}
         </div>
       </section>
     </>

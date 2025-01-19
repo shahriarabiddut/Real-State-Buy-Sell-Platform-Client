@@ -48,7 +48,11 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/about", element: <AboutUs /> },
-      { path: "/agents", element: <Agents /> },
+      {
+        path: "/agents",
+        element: <Agents />,
+        loader: () => fetch(`${import.meta.env.VITE_URL}/agents?page=0&size=8`),
+      },
       { path: "/services", element: <Services /> },
       {
         path: "/properties",

@@ -6,7 +6,7 @@ const Agent = ({ agent }) => {
     <div className="flex flex-col items-center">
       <div className="w-full overflow-hidden rounded-lg relative group">
         <img
-          src={agent.image}
+          src={agent.photo}
           className="w-full h-96 object-cover transition-transform duration-300 transform group-hover:scale-110"
           alt={agent.name}
         />
@@ -20,7 +20,7 @@ const Agent = ({ agent }) => {
             </Link>
           </h3>
           <p className="p-2 rounded-lg bg-white text-xs text-black m-2">
-            {agent.properties} Properties
+            {agent.propertyCount} Properties
           </p>
         </div>
       </div>

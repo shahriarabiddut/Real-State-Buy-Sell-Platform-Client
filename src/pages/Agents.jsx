@@ -1,47 +1,29 @@
-import React from "react";
-import BreadcumbBanner from "../components/BreadcumbBanner";
-import profileError from "../assets/profileError.png";
-import SectionTitle from "../components/SectionTitle";
+import React, { useEffect, useState } from "react";
 import Agent from "../components/Agent";
+import BreadcumbBanner from "../components/BreadcumbBanner";
+import SectionTitle from "../components/SectionTitle";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import Pagination from "../components/Pagination";
+import { useLoaderData } from "react-router-dom";
 
 const Agents = () => {
-  const agents = [
-    {
-      name: "Carlos Henderson",
-      image: profileError,
-      properties: "10",
-    },
-    {
-      name: "Mike Bochs",
-      image: profileError,
-      properties: "10",
-    },
-    {
-      name: "Jessica Moore",
-      image: profileError,
-      properties: "10",
-    },
-    {
-      name: "Sarah Geronimo",
-      image: profileError,
-      properties: "10",
-    },
-    {
-      name: "Sarah Geronimo",
-      image: profileError,
-      properties: "10",
-    },
-    {
-      name: "Sarah Geronimo",
-      image: profileError,
-      properties: "10",
-    },
-    {
-      name: "Sarah Geronimo",
-      image: profileError,
-      properties: "10",
-    },
-  ];
+  const loadedData = useLoaderData();
+  const [agents, setAgents] = useState(loadedData.result);
+  const [count, setCount] = useState(loadedData.count);
+  const axiosSecure = useAxiosSecure();
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(8);
+  useEffect(() => {
+    axiosSecure
+      .get(`/agents?page=${currentPage}&size=${itemsPerPage}`)
+      .then((res) => {
+        // console.log(res.data.result);
+        setAgents(res.data.result);
+        setCount(res.data.count);
+      });
+  }, [itemsPerPage, currentPage]);
+  const numberOfPages = Math.ceil(count / itemsPerPage) || 1;
+  const pages = [...Array(numberOfPages).keys()];
   return (
     <>
       <BreadcumbBanner title={"Agents"} />
@@ -52,10 +34,26 @@ const Agents = () => {
           color={"black"}
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ">
-          {agents.map((agent, index) => (
-            <Agent key={index} agent={agent} />
-          ))}
+          {count > 0 ? (
+            <>
+              {agents.map((agent, index) => (
+                <Agent key={index} agent={agent} />
+              ))}
+            </>
+          ) : (
+            <>No Agents Found!</>
+          )}
         </div>
+        {/* Pagination */}
+        {count > 0 && (
+          <Pagination
+            setItemsPerPage={setItemsPerPage}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+            pages={pages}
+            itemsPerPage={itemsPerPage}
+          />
+        )}
       </section>
     </>
   );
