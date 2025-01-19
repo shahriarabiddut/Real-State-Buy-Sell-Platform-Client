@@ -64,11 +64,11 @@ const Sidebar = () => {
   return (
     <>
       <header
-        className={` py-4  shadow-md ${dark ? "bg-gray-800" : "bg-white"} `}
+        className={` py-3  shadow-md ${dark ? "bg-gray-800" : "bg-white"} `}
       >
         <div
           className={`container flex items-center justify-between md:justify-end h-full px-6 mx-auto  ${
-            dark ? "text-green-300" : "text-green-600"
+            dark ? "text-gray-100" : "text-purple-600"
           }`}
         >
           <button
@@ -81,20 +81,19 @@ const Sidebar = () => {
             {/* <!-- Theme toggler --> */}
             <li className="flex">
               <button
-                className="rounded-md focus:outline-none focus:shadow-outline-purple"
+                className="rounded-xl p-2 focus:outline-none focus:shadow-outline-purple text-xl -mt-10 border-2"
                 onClick={toggleTheme}
               >
                 {dark ? <FaSun /> : <FaMoon />}
               </button>
             </li>
             {/* <!-- Notifications menu --> */}
-            <li className="relative">
+            {/* <li className="relative">
               <button
                 className="relative align-middle rounded-md focus:outline-none focus:shadow-outline-purple"
                 onClick={toggleNotification}
               >
                 <FaBell />
-                {/* <!-- Notification badge --> */}
                 <span
                   aria-hidden="true"
                   className={` absolute top-0 right-0 inline-block w-3 h-3 transform translate-x-1 -translate-y-1 bg-red-600 border-2  rounded-full ${
@@ -172,17 +171,17 @@ const Sidebar = () => {
                   </ul>
                 )}
               </div>
-            </li>
+            </li> */}
             {/* Profile Menu */}
             <li className="relative">
               <button
-                className="align-middle rounded-full focus:shadow-outline-purple focus:outline-none"
+                className="align-middle rounded-full focus:shadow-outline-purple focus:outline-none "
                 aria-label="Account"
                 aria-haspopup="true"
                 onClick={toggleProfile}
               >
                 <img
-                  className="object-cover w-6 h-6 rounded-full"
+                  className="object-cover w-10 h-10 rounded-full "
                   src={user.photoURL}
                   onError={(e) => handleImageError(e)}
                   alt={user.displayName}

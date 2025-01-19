@@ -166,7 +166,11 @@ const SoldProperties = () => {
                             </div>
                           </td>
                           <td className={fontColorTh}>৳ {deal.offerPrice}</td>
-                          <td className="flex gap-1">{deal?.transactionId}</td>
+                          <td className="flex gap-1">
+                            <div className={fontColorTh + " font-bold"}>
+                              {deal?.transactionId}
+                            </div>
+                          </td>
                         </tr>
                       ))}
                     </tbody>

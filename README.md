@@ -55,8 +55,8 @@ By combining intuitive features with robust management tools, the platform ensur
 -   Assignment Category/variant: Assignment12_category_011
 -   Admin email: admin@gmail.com
 -   Admin password: admin@gmail.comA1
--   Agent email: agent@gmail.com
--   Agent password: agent@gmail.comA1
+-   Agent email: agentph@gmail.com
+-   Agent password: agentph@gmail.comA1
 -   Front-end Live Site Link: https://phrealstate.web.app
 -   Client Side Github Repository Link: https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-shahriarabiddut
 -   Server Side Github Repository Link: https://github.com/Programming-Hero-Web-Course4/b10a12-server-side-shahriarabiddut
