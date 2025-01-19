@@ -7,7 +7,7 @@ const useReview = ({ dashboard, propertyId }) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const panel = dashboard ? "dashboard" : "";
-  const userEmail = dashboard === "home" ? "" : user.email;
+  const userEmail = dashboard !== "user" ? "" : user.email;
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(8);
   const {
@@ -20,6 +20,7 @@ const useReview = ({ dashboard, propertyId }) => {
       const res = await axiosSecure.get(
         `/review?email=${userEmail}&dashboard=${panel}&id=${propertyId}`
       );
+      // console.log(res);
       return res.data;
     },
   });

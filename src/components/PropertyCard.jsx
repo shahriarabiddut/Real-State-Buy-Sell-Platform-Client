@@ -178,7 +178,7 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
         )}
         {userType === "bought" && (
           <>
-            <table className="table-auto border-collapse border border-gray-300 w-full my-4">
+            <table className="table-fixed border-collapse border border-gray-300 w-full my-4">
               <tbody>
                 <tr className="border border-gray-300">
                   <td
@@ -219,11 +219,19 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
                     </td>
                   </tr>
                 )}
-                {property?.trID !== null && (
-                  <tr className="border border-gray-300 p-2">
-                    <td className={tdCss}>TransactionId</td>
-                    <td className={tdpCss + " uppercase"}>{property?.trId}</td>
-                  </tr>
+                {status === "bought" && (
+                  <>
+                    <tr className="border border-gray-300 p-2">
+                      <td colSpan={2} className={tdCss}>
+                        TransactionId
+                      </td>
+                    </tr>
+                    <tr className="border border-gray-300 p-2">
+                      <td colSpan={2} className={tdpCss + " uppercase"}>
+                        {property?.trId}
+                      </td>
+                    </tr>
+                  </>
                 )}
               </tbody>
             </table>
