@@ -30,7 +30,7 @@ const ChosePurpose = () => {
         .catch((error) => {
           // console.error("Error updating user role:", error);
         });
-    }, 3000);
+    }, 2000);
   }, []);
 
   //
@@ -60,11 +60,7 @@ const ChosePurpose = () => {
         }
       })
       .catch((error) => {
-        if (error.status == 401) {
-          showToast("You don't Have Permission!", "error");
-        } else {
-          showToast("You cannot change role Again!", "error");
-        }
+        showToast("You don't Have Permission!", "error");
       });
   };
 

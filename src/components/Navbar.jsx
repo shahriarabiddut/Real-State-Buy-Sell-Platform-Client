@@ -123,10 +123,16 @@ const Navbar = () => {
                         <span>Dashboard</span>
                       </Link>
                     )}
-                    {(isRole === "user" || isRole === "notMentioned") && (
+                    {isRole === "user" && (
                       <Link className={cssUser} to={`/dashboard/userHome`}>
                         <MdDashboard />
                         <span>Dashboard</span>
+                      </Link>
+                    )}
+                    {isRole === "notMentioned" && (
+                      <Link className={cssUser} to={`/chosePurpose`}>
+                        <MdDashboard />
+                        <span>Chose Purpose</span>
                       </Link>
                     )}
                   </li>
