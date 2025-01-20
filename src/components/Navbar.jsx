@@ -71,7 +71,7 @@ const Navbar = () => {
           className={cssClass}
           onClick={() => setIsOpen(false)}
         >
-          Properties
+          All Properties
         </NavLink>
       </li>
 
@@ -202,10 +202,12 @@ const Navbar = () => {
         <div className="lg:hidden flex">
           <div
             className={`${
-              isOpen ? "flex justify-center" : "hidden"
-            } font-poppins bg-blue-200 mt-4 absolute top-16 right-0 mx-3 my-2 z-10 rounded-xl w-1/3 p-3`}
+              isOpen
+                ? "translate-x-0 opacity-100 ease-out"
+                : "translate-x-full opacity-0 ease-in "
+            } font-poppins bg-green-300 mt-5 md:mt-6 absolute top-16 right-0 mx-3 my-2 z-10 rounded-xl w-1/2 h-auto p-3 transition-transform  duration-500 `}
           >
-            <ul className="list-none flex flex-col justify-center items-center gap-3 ">
+            <ul className="list-none flex flex-col justify-center items-center gap-3">
               {links}
             </ul>
           </div>

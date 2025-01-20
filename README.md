@@ -52,7 +52,7 @@ By combining intuitive features with robust management tools, the platform ensur
 
 # Submission
 
--   Assignment Category/variant: Assignment12_category_011
+-   Assignment Category/variant: assignment12_category_011
 -   Admin email: admin@gmail.com
 -   Admin password: admin@gmail.comA1
 -   Agent email: agentph@gmail.com

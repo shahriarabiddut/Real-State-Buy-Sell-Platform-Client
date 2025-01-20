@@ -7,7 +7,7 @@ const useProperty = ({ admin, home, advertise }) => {
   // For Search
   const [filters, setFilters] = useState("");
   const [sort, setSort] = useState(0);
-  console.log(admin, home, advertise, sort);
+  // console.log(admin, home, advertise, sort);
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const userEmail = admin ? "" : user?.email;

@@ -1,14 +1,9 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
-import errorProperty from "../assets/errorProperty.jpg";
 import { FaEye, FaPen, FaTrash } from "react-icons/fa";
 import { RiSpeakAiLine } from "react-icons/ri";
+import { Link, NavLink } from "react-router-dom";
 
 const PropertyCard = ({ property, dark, handleDelete, userType }) => {
-  const handleImageError = (e) => {
-    e.target.src = errorProperty;
-    e.target.onerror = null;
-  };
   const {
     _id,
     image,
@@ -33,12 +28,7 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
       }`}
     >
       <div className="relative">
-        <img
-          src={image}
-          alt={title}
-          className="w-full h-48 object-cover"
-          onError={handleImageError}
-        />
+        <img src={image} alt={title} className="w-full h-48 object-cover" />
         <div
           className={`badge ${
             status == "pending"
@@ -103,21 +93,25 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
                   <FaEye />
                 </button>
               </NavLink>
-              {status === "rejected" || (
-                <NavLink to={`/dashboard/agent/updateProperty/${_id}`}>
-                  <button className="inline-flex btn btn-sm btn-info text-white">
-                    <FaPen /> Edit
+              {status !== "sold" && (
+                <>
+                  {status !== "rejected" && (
+                    <NavLink to={`/dashboard/agent/updateProperty/${_id}`}>
+                      <button className="inline-flex btn btn-sm btn-info text-white">
+                        <FaPen /> Edit
+                      </button>
+                    </NavLink>
+                  )}
+                  <button
+                    className="inline-flex btn btn-sm btn-error text-white"
+                    onClick={() => {
+                      handleDelete(_id);
+                    }}
+                  >
+                    <FaTrash />
                   </button>
-                </NavLink>
+                </>
               )}
-              <button
-                className="inline-flex btn btn-sm btn-error text-white"
-                onClick={() => {
-                  handleDelete(_id);
-                }}
-              >
-                <FaTrash />
-              </button>
             </div>
           </>
         )}
@@ -196,7 +190,7 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
                 </tr>
                 <tr className="border border-gray-300">
                   <td className={tdCss}>Offered Price</td>
-                  <td className={tdpCss}>{minPrice}</td>
+                  <td className={tdpCss}>{property?.offerPrice}</td>
                 </tr>
                 <tr className="border border-gray-300">
                   <td className={tdCss}>Status</td>

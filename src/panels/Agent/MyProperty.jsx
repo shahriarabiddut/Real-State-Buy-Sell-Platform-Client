@@ -78,9 +78,7 @@ const MyProperty = () => {
         ) : (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-2">
-              {count === 0 ? (
-                <p>No properties found.</p>
-              ) : (
+              {count > 0 ? (
                 properties.map((property, index) => (
                   <PropertyCard
                     key={index}
@@ -90,6 +88,8 @@ const MyProperty = () => {
                     userType={"agent"}
                   />
                 ))
+              ) : (
+                <p>No properties found.</p>
               )}
             </div>
 

@@ -164,6 +164,9 @@ const ManageProperties = () => {
                             </button>
                           </>
                         )}
+                        {property.status == "sold" && (
+                          <p className="text-yellow-800 font-bold">Sold</p>
+                        )}
                         {property.status == "verified" && (
                           <p className="text-green-800 font-bold">Verified</p>
                         )}

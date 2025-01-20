@@ -2,8 +2,14 @@ import React from "react";
 import BreadcumbBanner from "../components/BreadcumbBanner";
 import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const Contact = () => {
+  const { showToast } = useAuth();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    showToast("We Will Contact you soon!", "success");
+  };
   return (
     <>
       <BreadcumbBanner title={"Contact Us"} />
@@ -16,7 +22,10 @@ const Contact = () => {
                 <br />
                 please do not hesitate to send us a message
               </h2>
-              <form className="bg-base-100 shadow-md rounded p-6">
+              <form
+                className="bg-base-100 shadow-md rounded p-6"
+                onSubmit={handleSubmit}
+              >
                 <div className="form-control mb-4">
                   <input
                     type="text"
@@ -26,7 +35,7 @@ const Contact = () => {
                 </div>
                 <div className="form-control mb-4">
                   <input
-                    type="text"
+                    type="email"
                     className="input input-bordered w-full"
                     placeholder="Your Email"
                   />

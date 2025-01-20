@@ -1,19 +1,19 @@
-import React, { createContext, useEffect, useState } from "react";
 import {
-  getAuth,
   createUserWithEmailAndPassword,
+  getAuth,
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
-  signInWithPopup,
-  GoogleAuthProvider,
 } from "firebase/auth";
-import app from "../firebase/firebase.config";
-import Swal from "sweetalert2";
+import React, { createContext, useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import useAxiosPublic from "../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 import Loading from "../components/Loading";
+import app from "../firebase/firebase.config";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const auth = getAuth(app);
 export const AuthContext = createContext(null);
@@ -132,6 +132,7 @@ const AuthProvider = ({ children }) => {
   if (loading) {
     return <Loading />;
   }
+
   return (
     <AuthContext.Provider value={authInfo}>
       {children}

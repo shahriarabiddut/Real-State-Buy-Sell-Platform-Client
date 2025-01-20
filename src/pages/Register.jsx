@@ -84,12 +84,12 @@ const Register = () => {
         <title>Register | {import.meta.env.VITE_NAME}</title>
       </Helmet>
       <div className="hero bg-base-200 min-h-screen py-20">
-        <div className="hero-content bg-white flex-col lg:flex-row-reverse md:flex-row-reverse p-10 m-[5%] md:m-10 border-2 shadow-2xl rounded-sm w-11/12">
+        <div className="hero-content flex flex-wrap lg:flex-nowrap p-4 md:p-6 lg:p-10 m-4 md:m-6 lg:m-10 border-2 shadow-2xl w-11/12 lg:w-11/12">
           <div className="text-center lg:text-left w-full lg:w-1/2 md:w-1/2">
-            <img src={authImg} alt="" />
+            <img src={authImg} alt="" className="max-w-full h-auto" />
           </div>
           <div className="card bg-base-100 w-full lg:w-1/2 md:w-1/2 shadow-2xl">
-            <h1 className="text-5xl font-bold pt-5 font-poppins text-center">
+            <h1 className="text-4xl lg:text-5xl font-bold pt-5 font-cinzel text-center">
               Register
             </h1>
             <form className="card-body py-5" onSubmit={handleSubmit(onSubmit)}>

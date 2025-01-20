@@ -10,7 +10,7 @@ const Agents = () => {
   const axiosSecure = useAxiosSecure();
   useEffect(() => {
     axiosSecure.get(`/agents?page=0&size=4`).then((res) => {
-      console.log(res.data.result);
+      // console.log(res.data.result);
       setAgents(res.data.result);
       setCount(res.data.count);
     });

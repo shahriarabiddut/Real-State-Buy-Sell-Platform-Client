@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { HelmetProvider } from "react-helmet-async";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Loading from "../components/Loading";
 import Navbar from "../components/Navbar";
@@ -19,6 +19,16 @@ const AuthLayout = () => {
       navigate("/");
     }
   }, [user]);
+  // Scrolling To Top
+  const { pathname } = useLocation();
+  // console.log(pathname);
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [pathname]);
+  //
   return (
     <HelmetProvider>
       <Navbar />

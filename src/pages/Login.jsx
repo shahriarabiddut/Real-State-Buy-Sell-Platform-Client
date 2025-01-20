@@ -75,12 +75,12 @@ const Login = () => {
         <title>Login | {import.meta.env.VITE_NAME}</title>
       </Helmet>
       <div className="hero bg-base-200 min-h-screen py-20">
-        <div className="hero-content flex-col lg:flex-row md:flex-row p-10 m-10 border-2 shadow-2xl w-11/12">
+        <div className="hero-content flex flex-wrap lg:flex-nowrap p-4 md:p-6 lg:p-10 m-4 md:m-6 lg:m-10 border-2 shadow-2xl w-11/12 lg:w-11/12">
           <div className="text-center lg:text-left w-full lg:w-1/2 md:w-1/2">
-            <img src={authImg} alt="" />
+            <img src={authImg} alt="" className="max-w-full h-auto" />
           </div>
           <div className="card bg-base-100 w-full lg:w-1/2 md:w-1/2 shadow-2xl">
-            <h1 className="text-5xl font-bold pt-5 font-cinzel text-center">
+            <h1 className="text-4xl lg:text-5xl font-bold pt-5 font-cinzel text-center">
               Login
             </h1>
             <form className="card-body py-5" onSubmit={handleLogin}>
@@ -121,7 +121,6 @@ const Login = () => {
                   className="input input-bordered"
                   required
                 />
-                {/* <button className='btn btn-outline btn-xs my-2' type='button' onClick={handleValidateCaptcha}>Validate</button> */}
               </div>
               <div className="form-control mt-6">
                 <input
@@ -134,14 +133,12 @@ const Login = () => {
             </form>
             <p className="text-blue-700 text-center pb-5">
               <small>
-                New Here ?
+                New Here?
                 <Link to={"/auth/register"} className="font-bold">
-                  {" "}
                   &nbsp; Create A New Account
                 </Link>
               </small>
             </p>
-
             <div className="divider">OR</div>
             <SocialLogin navigate={navigate} location={location} from={from} />
           </div>
