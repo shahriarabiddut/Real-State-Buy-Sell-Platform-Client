@@ -48,15 +48,59 @@ By combining intuitive features with robust management tools, the platform ensur
 
 # npm Packages
 
--   Please lookup in package.json file!
+### dependencies 
+-   "@stripe/react-stripe-js": "^3.1.1",
+-   "@stripe/stripe-js": "^5.5.0",
+-   "@tanstack/react-query": "^5.64.1",
+-   "axios": "^1.7.9",
+-   "firebase": "^11.1.0",
+-   "localforage": "^1.10.0",
+-   "match-sorter": "^8.0.0",
+-   "react": "^18.3.1",
+-   "react-dom": "^18.3.1",
+-   "react-helmet-async": "^2.0.5",
+-   "react-hook-form": "^7.54.2",
+-   "react-icons": "^5.4.0",
+-   "react-router-dom": "^7.1.1",
+-   "react-simple-captcha": "^9.3.1",
+-   "react-tabs": "^6.1.0",
+-   "react-toastify": "^11.0.3",
+-   "sort-by": "^1.2.0",
+-   "sweetalert2": "^11.15.10",
+-   "swiper": "^11.2.1"
 
-# Submission
+### devDependencies
+-   "@eslint/js": "^9.17.0",
+-   "@types/react": "^18.3.18",
+-   "@types/react-dom": "^18.3.5",
+-   "@vitejs/plugin-react": "^4.3.4",
+-   "autoprefixer": "^10.4.20",
+-   "daisyui": "^4.12.23",
+-   "eslint": "^9.17.0",
+-   "eslint-plugin-react": "^7.37.2",
+-   "eslint-plugin-react-hooks": "^5.0.0",
+-   "eslint-plugin-react-refresh": "^0.4.16",
+-   "globals": "^15.14.0",
+-   "postcss": "^8.5.1",
+-   "tailwindcss": "^3.4.17",
+-   "vite": "^6.0.5"-  
 
--   Assignment Category/variant: assignment12_category_011
+## Instructions for Running the Project Locally
+
+### Frontend 
+1. **Install the dependencies:**
+-   `npm install`
+2. **Create/Replace .env.local (Rename .env.example to .env.local ):**
+-   Add your Credentials Here !
+3. **Start the development server:**
+-   `npm run dev`
+5. **Access the application:**
+-   Open your browser and navigate to `http://localhost:5173`.
+
+# Credentials
+
 -   Admin email: admin@gmail.com
 -   Admin password: admin@gmail.comA1
 -   Agent email: agentph@gmail.com
 -   Agent password: agentph@gmail.comA1
--   Front-end Live Site Link: https://phrealstate.web.app
--   Client Side Github Repository Link: https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-shahriarabiddut
--   Server Side Github Repository Link: https://github.com/Programming-Hero-Web-Course4/b10a12-server-side-shahriarabiddut
+-   Live Site Link: https://phrealstate.web.app
