@@ -33,6 +33,7 @@ const useWishList = ({ dashboard }) => {
     itemsPerPage,
     setItemsPerPage,
     pages,
+    count: wishlist?.count || 0,
   };
 };
 

@@ -1,14 +1,13 @@
 import React from "react";
-import Pagination from "../../components/Pagination";
-import useReview from "../../hooks/useReview";
-import Loading from "../../components/Loading";
-import ReviewCard from "../../components/ReviewCard";
-import useAuth from "../../hooks/useAuth";
-import PageTitle from "../../layouts/components/PageTitle";
 import { FaEye, FaQuoteLeft, FaTrash } from "react-icons/fa";
-import Swal from "sweetalert2";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { NavLink } from "react-router-dom";
+import Swal from "sweetalert2";
+import Loading from "../../components/Loading";
+import Pagination from "../../components/Pagination";
+import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useReview from "../../hooks/useReview";
+import PageTitle from "../../layouts/components/PageTitle";
 
 const MyReviews = () => {
   const { user, dark } = useAuth();
@@ -92,24 +91,24 @@ const MyReviews = () => {
                           <FaQuoteLeft />
                         </span>
                         <p className="text-gray-700 mb-6 text-justify overflow-hidden">
-                          {review.description}
+                          {review?.description}
                         </p>
                       </div>
                       <div className="flex items-center justify-start mt-auto space-y-2">
                         <div className="text-left">
                           <p className="font-semibold">
-                            {review.propertyDetails.title}
+                            {review?.propertyDetails?.title}
                           </p>
                           <p className="font-semibold">
-                            Agent : {review.propertyDetails.agentName}
+                            Agent : {review?.propertyDetails?.agentName}
                           </p>
                           <span className="text-sm text-gray-500">
-                            {review.createdAt}
+                            {review?.createdAt}
                           </span>
                         </div>
                       </div>
                       <div className="my-2 flex justify-between items-center gap-1">
-                        <NavLink to={`/property/${review.propertyId}`}>
+                        <NavLink to={`/property/${review?.propertyId}`}>
                           <button className="inline-flex items-center btn btn-sm btn-success text-white ">
                             <FaEye /> Property
                           </button>
@@ -117,7 +116,7 @@ const MyReviews = () => {
                         <button
                           className="inline-flex btn btn-sm btn-error text-white"
                           onClick={() => {
-                            handleDelete(review._id);
+                            handleDelete(review?._id);
                           }}
                         >
                           <FaTrash />

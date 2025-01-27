@@ -4,17 +4,7 @@ import { RiSpeakAiLine } from "react-icons/ri";
 import { Link, NavLink } from "react-router-dom";
 
 const PropertyCard = ({ property, dark, handleDelete, userType }) => {
-  const {
-    _id,
-    image,
-    title,
-    status,
-    minPrice,
-    maxPrice,
-    area,
-    location,
-    agentName,
-  } = property;
+  // console.log(property);
   const tdCss = `font-medium border border-gray-300 px-2 py-1 ${
     dark ? "text-gray-200" : "text-gray-500"
   }`;
@@ -28,21 +18,25 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
       }`}
     >
       <div className="relative">
-        <img src={image} alt={title} className="w-full h-48 object-cover" />
+        <img
+          src={property?.image}
+          alt={property?.title}
+          className="w-full h-48 object-cover"
+        />
         <div
           className={`badge ${
-            status == "pending"
+            property?.status == "pending"
               ? "badge-info"
-              : status == "rejected"
+              : property?.status == "rejected"
               ? "badge-error"
               : "badge-primary"
           } absolute top-2 left-2 uppercase text-white font-semibold`}
         >
-          {status}
+          {property?.status}
         </div>
         <div className="absolute bottom-2 left-2 bg-white px-3 py-1 rounded-md shadow-md">
           <span className="font-bold">
-            ৳ {minPrice}-{maxPrice}
+            ৳ {property?.minPrice}-{property?.maxPrice}
           </span>
         </div>
       </div>
@@ -51,18 +45,18 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
           <>
             <ul className="flex justify-between text-sm text-gray-600 mb-4">
               <li className={`${dark ? "text-gray-200" : "text-gray-500"}`}>
-                {area} sqft
+                {property?.area} sqft
               </li>
             </ul>
 
             <div className="min-h-18">
-              <Link to={`/property/${_id}`}>
+              <Link to={`/property/${property?._id}`}>
                 <h3
                   className={`font-bold text-lg mb-1 hover:text-blue-500  ${
                     dark ? "text-gray-200" : "text-gray-900"
                   }`}
                 >
-                  {title}
+                  {property?.title}
                 </h3>
               </Link>
               <p
@@ -70,7 +64,7 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
                   dark ? "text-gray-200" : "text-gray-500"
                 }`}
               >
-                {location}
+                {property?.location}
               </p>
             </div>
           </>
@@ -81,22 +75,26 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
               <div className="flex items-center">
                 <img
                   src={property?.agent?.photo}
-                  alt={agentName}
+                  alt={property?.agentName}
                   className="w-10 h-10 rounded-full object-cover mr-2"
                 />
-                <span className="text-sm font-medium">{agentName}</span>
+                <span className="text-sm font-medium">
+                  {property?.agentName}
+                </span>
               </div>
             </div>
             <div className="mt-4 flex justify-between items-center">
-              <NavLink to={`/property/${_id}`}>
+              <NavLink to={`/property/${property?._id}`}>
                 <button className="inline-flex btn btn-sm btn-success text-white">
                   <FaEye />
                 </button>
               </NavLink>
-              {status !== "sold" && (
+              {property?.status !== "sold" && (
                 <>
-                  {status !== "rejected" && (
-                    <NavLink to={`/dashboard/agent/updateProperty/${_id}`}>
+                  {property?.status !== "rejected" && (
+                    <NavLink
+                      to={`/dashboard/agent/updateProperty/${property?._id}`}
+                    >
                       <button className="inline-flex btn btn-sm btn-info text-white">
                         <FaPen /> Edit
                       </button>
@@ -105,7 +103,7 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
                   <button
                     className="inline-flex btn btn-sm btn-error text-white"
                     onClick={() => {
-                      handleDelete(_id);
+                      handleDelete(property?._id);
                     }}
                   >
                     <FaTrash />
@@ -121,14 +119,14 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
               <div className="flex items-center">
                 <img
                   src={property?.agent?.photo}
-                  alt={agentName}
+                  alt={property?.agentName}
                   className="w-10 h-10 rounded-full object-cover mr-2"
                 />
-                <p className="text-lg font-medium">{agentName}</p>
+                <p className="text-lg font-medium">{property?.agentName}</p>
               </div>
             </div>
             <div className="my-2 mx-auto w-full">
-              <NavLink to={`/property/${_id}`}>
+              <NavLink to={`/property/${property?._id}`}>
                 <button className="flex items-center btn btn-wide btn-success text-white ">
                   View Details
                 </button>
@@ -142,19 +140,19 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
               <div className="flex items-center">
                 <img
                   src={property?.agent?.photo}
-                  alt={agentName}
+                  alt={property?.agentName}
                   className="w-10 h-10 rounded-full object-cover mr-2"
                 />
-                <p className="text-lg font-medium">{agentName}</p>
+                <p className="text-lg font-medium">{property?.agentName}</p>
               </div>
             </div>
             <div className="mt-4 flex justify-between items-center">
-              {/* <NavLink to={`/property/${_id}`}>
+              {/* <NavLink to={`/property/${property?._id}`}>
                 <button className="inline-flex btn btn-sm btn-success text-white">
                   <FaEye />
                 </button>
               </NavLink> */}
-              <NavLink to={`/dashboard/makeOffer/${_id}`}>
+              <NavLink to={`/dashboard/makeOffer/${property?._id}`}>
                 <button className="inline-flex btn btn-sm btn-info text-white">
                   <RiSpeakAiLine /> Make an offer
                 </button>
@@ -179,14 +177,14 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
                     colSpan={2}
                     className={tdpCss + " font-bold hover:text-blue-500"}
                   >
-                    <Link to={`/property/${_id}`}>
-                      {title} ({area} sqft.)
+                    <Link to={`/property/${property?._id}`}>
+                      {property?.title} ({property?.area} sqft.)
                     </Link>
                   </td>
                 </tr>
                 <tr className="border border-gray-300">
                   <td className={tdCss}>Agent</td>
-                  <td className={tdpCss}>{agentName}</td>
+                  <td className={tdpCss}>{property?.agentName}</td>
                 </tr>
                 <tr className="border border-gray-300">
                   <td className={tdCss}>Offered Price</td>
@@ -194,9 +192,9 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
                 </tr>
                 <tr className="border border-gray-300">
                   <td className={tdCss}>Status</td>
-                  <td className={tdpCss + " uppercase"}>{status}</td>
+                  <td className={tdpCss + " uppercase"}>{property?.status}</td>
                 </tr>
-                {status === "accepted" && (
+                {property?.status === "accepted" && (
                   <tr className="border border-gray-300 p-2">
                     <td
                       colSpan={2}
@@ -213,7 +211,7 @@ const PropertyCard = ({ property, dark, handleDelete, userType }) => {
                     </td>
                   </tr>
                 )}
-                {status === "bought" && (
+                {property?.status === "bought" && (
                   <>
                     <tr className="border border-gray-300 p-2">
                       <td colSpan={2} className={tdCss}>

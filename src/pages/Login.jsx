@@ -10,11 +10,13 @@ import authImg from "../assets/login.gif";
 import SocialLogin from "../components/SocialLogin";
 import useAuth from "../hooks/useAuth";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const captchaRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
-  const { signIn, showToast } = useAuth();
+  const { signIn, showToast, setLoading } = useAuth();
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
@@ -51,10 +53,16 @@ const Login = () => {
         navigate(from, { replace: true });
       })
       .catch((error) => {
-        showToast("Invalid Email/Password", "error");
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
+        setLoading(false);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Invalid Email / Password!",
+        });
+        showToast("Invalid Email/Password", "info");
       });
   };
   const handleValidateCaptcha = (e) => {
@@ -119,12 +127,12 @@ const Login = () => {
                   onBlur={handleValidateCaptcha}
                   name="captcha"
                   className="input input-bordered"
-                  required
+                  // required
                 />
               </div>
               <div className="form-control mt-6">
                 <input
-                  disabled={disabled}
+                  // disabled={disabled}
                   type="submit"
                   className="btn bg-firstBg text-white"
                   value="Login"
