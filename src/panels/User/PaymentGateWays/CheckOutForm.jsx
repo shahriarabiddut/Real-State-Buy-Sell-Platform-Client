@@ -1,8 +1,8 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const CheckOutForm = ({ deal }) => {
   const [error, setError] = useState("");
@@ -76,7 +76,8 @@ const CheckOutForm = ({ deal }) => {
           date: new Date(), // UTC Convert : MomentJs
           dealId: deal._id,
           propertyId: deal.propertyId,
-          status: "",
+          status: "paid",
+          method: "stripe",
         };
         const result = await axiosSecure.post("/payments", payment);
         console.log("Payment Saved ", result);

@@ -38,6 +38,11 @@ import MakeOffer from "../panels/User/MakeOffer";
 import Payment from "../panels/User/Payment";
 import ManageFeaturedProperties from "../panels/Admin/ManageFeaturedProperties";
 import PropertiesSearch from "../pages/Properties/PropertSearch";
+import {
+  CancelledPayment,
+  FailedPayment,
+  SuccessPayment,
+} from "../panels/User/PaymentStatus";
 
 const urlHome = import.meta.env.VITE_URL;
 const router = createBrowserRouter([
@@ -169,6 +174,30 @@ const router = createBrowserRouter([
         element: (
           <UserRoute>
             <MyReviews />
+          </UserRoute>
+        ),
+      },
+      {
+        path: "/dashboard/payment/failed",
+        element: (
+          <UserRoute>
+            <FailedPayment />
+          </UserRoute>
+        ),
+      },
+      {
+        path: "/dashboard/payment/cancelled",
+        element: (
+          <UserRoute>
+            <CancelledPayment />
+          </UserRoute>
+        ),
+      },
+      {
+        path: "/dashboard/payment/success",
+        element: (
+          <UserRoute>
+            <SuccessPayment />
           </UserRoute>
         ),
       },

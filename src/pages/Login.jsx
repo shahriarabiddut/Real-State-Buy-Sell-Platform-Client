@@ -127,12 +127,12 @@ const Login = () => {
                   onBlur={handleValidateCaptcha}
                   name="captcha"
                   className="input input-bordered"
-                  // required
+                  required
                 />
               </div>
               <div className="form-control mt-6">
                 <input
-                  // disabled={disabled}
+                  disabled={disabled}
                   type="submit"
                   className="btn bg-firstBg text-white"
                   value="Login"
