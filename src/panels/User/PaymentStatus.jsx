@@ -9,8 +9,8 @@ export const FailedPayment = () => {
         <p className="text-lg text-gray-700 mb-6">
           Unfortunately, we couldn’t process your payment. Please try again.
         </p>
-        <Link to="/payment" className="btn btn-primary">
-          Retry Payment
+        <Link to="/dashboard/propertyBought" className="btn btn-primary">
+          Retry ! Show My Offered Properties
         </Link>
       </div>
     </div>
