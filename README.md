@@ -110,6 +110,10 @@ The platform aims to simplify real estate transactions by offering tailored feat
 
 - `npm run dev`
 
+4. **Server Side :**
+
+- Here is the server-side repository along with setup instructions for local deployment: https://github.com/shahriarabiddut/Real-State-Buy-Sell-Platform-Server
+
 5. **Access the application:**
 
 - Open your browser and navigate to `http://localhost:5173`.
@@ -121,6 +125,12 @@ The platform aims to simplify real estate transactions by offering tailored feat
 - Agent email: agentph@gmail.com
 - Agent password: agentph@gmail.comA1
 - Live Site Link: https://phrealstate.web.app
+
+-`If the credentials do not work properly, please contact me via email or WhatsApp so I can address the issue.`
+
+# Support
+
+For any issues or questions, please contact the development team or open an issue on the repository.
 
 # ScreenShot
 
